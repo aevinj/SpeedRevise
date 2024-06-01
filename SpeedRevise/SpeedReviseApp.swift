@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct SpeedReviseApp: App {
+    @StateObject var authViewModel = AuthViewModel()
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(authViewModel)
         }
     }
 }
