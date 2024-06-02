@@ -79,11 +79,22 @@ struct LogInView: View {
                         })
                         .padding(.bottom, 5)
                         .padding(.top, 5)
+                        .disabled(!formIsValid)
+                        .opacity(formIsValid ? 1.0 : 0.5)
                     }
                 }
                 
             }
         }
+    }
+}
+
+extension LogInView: AuthenticationFormProtocol {
+    var formIsValid: Bool {
+        return email.contains("@")
+        && email.count > 2
+        && !password.isEmpty
+        && password.count > 5
     }
 }
 

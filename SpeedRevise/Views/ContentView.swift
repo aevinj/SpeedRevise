@@ -8,6 +8,20 @@
 import SwiftUI
 
 struct ContentView: View {
+    @EnvironmentObject var authViewModel: AuthViewModel
+    
+    var body: some View {
+        Group {
+            if authViewModel.userSession != nil {
+                LoggedInView()
+            } else {
+                LogInView()
+            }
+        }
+    }
+}
+
+struct LoggedInView: View {
     @State private var selectedTab: Tab = .house
     
     init() {
@@ -39,14 +53,6 @@ struct ContentView: View {
 struct FolderView: View {
     var body: some View {
         Text("Folder View")
-            .font(.largeTitle)
-            .foregroundColor(.primary)
-    }
-}
-
-struct ProfileView: View {
-    var body: some View {
-        Text("Profile View")
             .font(.largeTitle)
             .foregroundColor(.primary)
     }

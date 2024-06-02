@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		4015A0422C0A489200620DC3 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4015A0412C0A489200620DC3 /* SignUpView.swift */; };
 		402BDC592C0A275B001587D7 /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402BDC582C0A275B001587D7 /* LogInView.swift */; };
+		40782CB42C0CAFFB004E923C /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40782CB32C0CAFFB004E923C /* ProfileView.swift */; };
 		4094C76E2C0B7E520049F539 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 4094C76D2C0B7E520049F539 /* FirebaseAuth */; };
 		4094C7702C0B7E520049F539 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 4094C76F2C0B7E520049F539 /* FirebaseFirestore */; };
 		4094C7722C0B7E520049F539 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4094C7712C0B7E520049F539 /* FirebaseFirestoreSwift */; };
@@ -25,6 +26,7 @@
 		40A5D4322C07AEA000852CA6 /* NavBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A5D4312C07AEA000852CA6 /* NavBarView.swift */; };
 		40A5D4342C07C6C300852CA6 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A5D4332C07C6C300852CA6 /* HomeView.swift */; };
 		40C319F52C0914CE00215518 /* FirstView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C319F42C0914CE00215518 /* FirstView.swift */; };
+		40CE7C552C0BC106005489AD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CE7C542C0BC106005489AD /* User.swift */; };
 		40EC2F502C0A86AB00AFA2AF /* TextInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EC2F4F2C0A86AA00AFA2AF /* TextInputView.swift */; };
 /* End PBXBuildFile section */
 
@@ -48,6 +50,7 @@
 /* Begin PBXFileReference section */
 		4015A0412C0A489200620DC3 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		402BDC582C0A275B001587D7 /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
+		40782CB32C0CAFFB004E923C /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		4094C7752C0B81490049F539 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		40A3BD4A2C0BA678003560A3 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		40A5D4042C0658E500852CA6 /* SpeedRevise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpeedRevise.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -63,6 +66,7 @@
 		40A5D4312C07AEA000852CA6 /* NavBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavBarView.swift; sourceTree = "<group>"; };
 		40A5D4332C07C6C300852CA6 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		40C319F42C0914CE00215518 /* FirstView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstView.swift; sourceTree = "<group>"; };
+		40CE7C542C0BC106005489AD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		40EC2F4F2C0A86AA00AFA2AF /* TextInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInputView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -103,6 +107,7 @@
 				40A5D4332C07C6C300852CA6 /* HomeView.swift */,
 				40A5D4092C0658E500852CA6 /* ContentView.swift */,
 				4015A0412C0A489200620DC3 /* SignUpView.swift */,
+				40782CB32C0CAFFB004E923C /* ProfileView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -118,6 +123,7 @@
 		40A3BD492C0BA42C003560A3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				40CE7C542C0BC106005489AD /* User.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -339,6 +345,8 @@
 				40A5D4082C0658E500852CA6 /* SpeedReviseApp.swift in Sources */,
 				40EC2F502C0A86AB00AFA2AF /* TextInputView.swift in Sources */,
 				40A5D4322C07AEA000852CA6 /* NavBarView.swift in Sources */,
+				40CE7C552C0BC106005489AD /* User.swift in Sources */,
+				40782CB42C0CAFFB004E923C /* ProfileView.swift in Sources */,
 				40A3BD4B2C0BA678003560A3 /* AuthViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
