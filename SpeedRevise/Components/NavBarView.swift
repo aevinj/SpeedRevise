@@ -21,6 +21,12 @@ struct NavBarView: View {
     
     var body: some View {
         VStack{
+            Divider()
+                .frame(minHeight: 3)
+                .overlay(RoundedRectangle(cornerRadius: 25)
+                    .fill(.primary))
+                .padding(.init(top: 0, leading: 16, bottom: 0, trailing: 16))
+            
             HStack{
                 ForEach(Tab.allCases, id: \.rawValue) { tab in
                     Spacer()
@@ -36,10 +42,8 @@ struct NavBarView: View {
                     Spacer()
                 }
             }
-            .frame(width: nil, height: 70)
-            .background(.ultraThinMaterial)
-            .cornerRadius(20)
-            .padding()
+            .frame(width: nil, height: 80)
+            .background(.background)
         }
     }
 }
