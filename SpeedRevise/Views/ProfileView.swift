@@ -12,7 +12,7 @@ struct ProfileView: View {
     
     var body: some View {
         VStack {
-            Text("My Account")
+            Text("My Account: \(authViewModel.currentUser?.firstName.capitalizedFirst ?? "ERROR")")
                 .font(.system(size: 24))
             
             Button(action: {

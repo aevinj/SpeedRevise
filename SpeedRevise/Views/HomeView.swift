@@ -8,69 +8,71 @@
 import SwiftUI
 
 struct HomeView: View {
-    @State private var name: String = "Aevin"
+    // TODO: change to use user environment variable
+    @State private var firstName: String = "Aevin"
+    @State private var notificationCount: Int = 1
+    @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
         ZStack {
-            
-            AngularGradient(colors: [.red, .teal, .blue, .black, .indigo, .red], center: .center)
+            Color("BackgroundColor")
                 .ignoresSafeArea()
-                .blur(radius: 100, opaque: true)
             
             VStack {
-                HStack {
-                    Image(systemName: "person.crop.circle")
-                        .resizable()
-                        .foregroundColor(.teal)
-                        .frame(width: 50, height: 50)
-                        .padding(EdgeInsets(top: 16, leading: 25, bottom: 16, trailing: 5))
-                    
-                    VStack {
-                        Text("Welcome back")
-                            .foregroundStyle(.white)
-                            .font(.system(size: 16, weight: .medium))
-                        
-                        Text(name)
-                            .font(.system(size: 20, weight: .heavy))
-                    }
-                    
-                    Spacer()
-                    
-                    // TODO: when this is shown, i want to animate a wave
-                    Text("👋")
-                        .font(.system(size: 40))
-                        .bold()
-                        .padding()
-                    
-                    Spacer()
-                }
-                .padding(EdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 0))
-                
-                HStack {
-                    Text("Upcoming Exams")
-                        .font(.system(size: 30, weight: .bold))
-                        .padding()
-                    
-                    Spacer()
-                    
-                    Button(action: {
-                        
-                    }, label: {
-                        Text("See all")
-                            .font(.system(size: 13, weight: .bold))
-                            .foregroundStyle(.white)
-                            .padding(EdgeInsets(top: 10, leading: 0, bottom: 0, trailing: 20))
-                    })
-                }
-                
-                RoundedRectangle(cornerRadius: 20)
-                    .fill(.ultraThinMaterial)
-                    .frame(maxWidth: .infinity, maxHeight: 300)
-                    .padding()
-                    
+                Image("leaves")
+                    .renderingMode(.template)
+                    .foregroundStyle(colorScheme == .dark ? Color(hex: "34373B") : Color(hex: "E6E6E6"))
                 
                 Spacer()
             }
+            .padding(.top, 50)
+            .ignoresSafeArea()
+            
+            VStack {
+                HStack {
+                    VStack {
+                        Text("Hello,")
+                            .font(.system(size: 30, weight: .regular))
+                            .foregroundStyle(.gray)
+                        
+                        Text(firstName)
+                            .font(.system(size: 32, weight: .regular))
+                            .foregroundStyle(Color.primary)
+                            .padding(.leading, 72)
+                    }
+                    .padding()
+                    
+                    Spacer()
+                    
+                    Button(action: {}, label: {
+                        Image(systemName: notificationCount > 0 ? "bell.badge.fill" : "bell.fill")
+                            .symbolRenderingMode(.palette)
+                            .foregroundStyle(Color.blue, colorScheme == .dark ? Color.white : Color.black)
+                            .font(.system(size: 30))
+                            .foregroundStyle(Color.primary)
+                            .shadow(radius: 70)
+                            .frame(width: 75, height: 75)
+                            .background(.ultraThinMaterial)
+                            .clipShape(RoundedRectangle(cornerRadius: 25))
+                            .padding(.trailing, 30)
+                    })
+                }
+                
+                Spacer()
+                
+            }
+            
+            VStack {
+                Spacer()
+                
+                RoundedRectangle(cornerRadius: 50.0)
+                    .fill(Color("BGCFlipped"))
+                    .ignoresSafeArea()
+                    .padding()
+                    .frame(width: nil, height: 500)
+            }
+            .ignoresSafeArea()
+            
         }
     }
 }
