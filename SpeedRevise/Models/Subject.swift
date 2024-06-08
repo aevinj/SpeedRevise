@@ -10,6 +10,12 @@ import Foundation
 struct Subject: Identifiable, Codable {
     let id: String
     var name: String
+    var topics: [Topic]
+}
+
+struct Topic: Identifiable, Codable {
+    let id: String
+    let name: String
     var notes: [Note]
     var quizzes: [Quiz]
 }

@@ -9,11 +9,18 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
+    @State var subjectViewModel: SubjectViewModel? = nil
     
     var body: some View {
         Group {
             if authViewModel.userSession != nil {
                 LoggedInView()
+                    .environmentObject(subjectViewModel ?? SubjectViewModel())
+                    .onAppear {
+                        if subjectViewModel == nil {
+                            subjectViewModel = SubjectViewModel()
+                        }
+                    }
             } else {
                 LogInView()
             }

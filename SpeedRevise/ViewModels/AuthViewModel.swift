@@ -60,6 +60,7 @@ class AuthViewModel : ObservableObject {
         }
     }
     
+    // TODO: implement this later
     func deleteAccount() {
         
     }
