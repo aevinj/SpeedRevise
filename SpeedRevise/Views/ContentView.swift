@@ -35,7 +35,7 @@ struct LoggedInView: View {
                     HomeView()
                         .tag(Tab.house)
                     
-                    FolderView()
+                    SubjectsView()
                         .tag(Tab.folder)
                     
                     ProfileView()
@@ -47,14 +47,6 @@ struct LoggedInView: View {
                 NavBarView(selectedTab: $selectedTab)
             }
         }
-    }
-}
-
-struct FolderView: View {
-    var body: some View {
-        Text("Folder View")
-            .font(.largeTitle)
-            .foregroundColor(.primary)
     }
 }
 

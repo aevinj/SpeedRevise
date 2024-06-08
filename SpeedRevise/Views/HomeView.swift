@@ -69,7 +69,7 @@ struct HomeView: View {
                     .fill(Color("BGCFlipped"))
                     .ignoresSafeArea()
                     .padding()
-                    .frame(width: nil, height: 500)
+                    .frame(width: nil, height: 575)
             }
             .ignoresSafeArea()
             

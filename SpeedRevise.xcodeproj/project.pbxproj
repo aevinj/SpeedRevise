@@ -18,6 +18,7 @@
 		4094C7742C0B7E520049F539 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 4094C7732C0B7E520049F539 /* FirebaseStorage */; };
 		4094C7762C0B81490049F539 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4094C7752C0B81490049F539 /* GoogleService-Info.plist */; };
 		40A3BD4B2C0BA678003560A3 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A3BD4A2C0BA678003560A3 /* AuthViewModel.swift */; };
+		40A46BAD2C13CDC5002D983A /* Subject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A46BAC2C13CDC5002D983A /* Subject.swift */; };
 		40A5D4082C0658E500852CA6 /* SpeedReviseApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A5D4072C0658E500852CA6 /* SpeedReviseApp.swift */; };
 		40A5D40A2C0658E500852CA6 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A5D4092C0658E500852CA6 /* ContentView.swift */; };
 		40A5D40C2C0658E600852CA6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 40A5D40B2C0658E600852CA6 /* Assets.xcassets */; };
@@ -29,6 +30,7 @@
 		40A5D4342C07C6C300852CA6 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A5D4332C07C6C300852CA6 /* HomeView.swift */; };
 		40C319F52C0914CE00215518 /* FirstView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C319F42C0914CE00215518 /* FirstView.swift */; };
 		40CE7C552C0BC106005489AD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CE7C542C0BC106005489AD /* User.swift */; };
+		40D7FA6F2C11FD6700326284 /* SubjectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D7FA6E2C11FD6700326284 /* SubjectsView.swift */; };
 		40EC2F502C0A86AB00AFA2AF /* TextInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EC2F4F2C0A86AA00AFA2AF /* TextInputView.swift */; };
 /* End PBXBuildFile section */
 
@@ -57,6 +59,7 @@
 		408478D22C0FC2FC00B67DF6 /* StringCapitalisation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringCapitalisation.swift; sourceTree = "<group>"; };
 		4094C7752C0B81490049F539 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		40A3BD4A2C0BA678003560A3 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		40A46BAC2C13CDC5002D983A /* Subject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subject.swift; sourceTree = "<group>"; };
 		40A5D4042C0658E500852CA6 /* SpeedRevise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpeedRevise.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		40A5D4072C0658E500852CA6 /* SpeedReviseApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedReviseApp.swift; sourceTree = "<group>"; };
 		40A5D4092C0658E500852CA6 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -71,6 +74,7 @@
 		40A5D4332C07C6C300852CA6 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		40C319F42C0914CE00215518 /* FirstView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstView.swift; sourceTree = "<group>"; };
 		40CE7C542C0BC106005489AD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		40D7FA6E2C11FD6700326284 /* SubjectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectsView.swift; sourceTree = "<group>"; };
 		40EC2F4F2C0A86AA00AFA2AF /* TextInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInputView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -115,6 +119,7 @@
 		40A3BD472C0BA41B003560A3 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				40D7FA6E2C11FD6700326284 /* SubjectsView.swift */,
 				402BDC582C0A275B001587D7 /* LogInView.swift */,
 				40C319F42C0914CE00215518 /* FirstView.swift */,
 				40A5D4332C07C6C300852CA6 /* HomeView.swift */,
@@ -137,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				40CE7C542C0BC106005489AD /* User.swift */,
+				40A46BAC2C13CDC5002D983A /* Subject.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -352,6 +358,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				402BDC592C0A275B001587D7 /* LogInView.swift in Sources */,
+				40A46BAD2C13CDC5002D983A /* Subject.swift in Sources */,
 				40A5D40A2C0658E500852CA6 /* ContentView.swift in Sources */,
 				408478D32C0FC2FC00B67DF6 /* StringCapitalisation.swift in Sources */,
 				40C319F52C0914CE00215518 /* FirstView.swift in Sources */,
@@ -360,6 +367,7 @@
 				40A5D4342C07C6C300852CA6 /* HomeView.swift in Sources */,
 				40A5D4082C0658E500852CA6 /* SpeedReviseApp.swift in Sources */,
 				40EC2F502C0A86AB00AFA2AF /* TextInputView.swift in Sources */,
+				40D7FA6F2C11FD6700326284 /* SubjectsView.swift in Sources */,
 				40A5D4322C07AEA000852CA6 /* NavBarView.swift in Sources */,
 				40CE7C552C0BC106005489AD /* User.swift in Sources */,
 				40782CB42C0CAFFB004E923C /* ProfileView.swift in Sources */,
