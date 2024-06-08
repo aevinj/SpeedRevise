@@ -14,6 +14,9 @@
 		40782CB42C0CAFFB004E923C /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40782CB32C0CAFFB004E923C /* ProfileView.swift */; };
 		408478D02C0FC0BC00B67DF6 /* ColorHex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408478CF2C0FC0BC00B67DF6 /* ColorHex.swift */; };
 		408478D32C0FC2FC00B67DF6 /* StringCapitalisation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 408478D22C0FC2FC00B67DF6 /* StringCapitalisation.swift */; };
+		4094029D2C14DB0200207CAE /* NoSubjectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4094029C2C14DB0200207CAE /* NoSubjectsView.swift */; };
+		4094029F2C14DB3100207CAE /* SubjectDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4094029E2C14DB3100207CAE /* SubjectDetailView.swift */; };
+		409402A12C14DBA700207CAE /* SubjectsExistingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409402A02C14DBA700207CAE /* SubjectsExistingView.swift */; };
 		4094C76E2C0B7E520049F539 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 4094C76D2C0B7E520049F539 /* FirebaseAuth */; };
 		4094C7702C0B7E520049F539 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 4094C76F2C0B7E520049F539 /* FirebaseFirestore */; };
 		4094C7722C0B7E520049F539 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4094C7712C0B7E520049F539 /* FirebaseFirestoreSwift */; };
@@ -61,6 +64,9 @@
 		40782CB32C0CAFFB004E923C /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
 		408478CF2C0FC0BC00B67DF6 /* ColorHex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorHex.swift; sourceTree = "<group>"; };
 		408478D22C0FC2FC00B67DF6 /* StringCapitalisation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringCapitalisation.swift; sourceTree = "<group>"; };
+		4094029C2C14DB0200207CAE /* NoSubjectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoSubjectsView.swift; sourceTree = "<group>"; };
+		4094029E2C14DB3100207CAE /* SubjectDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectDetailView.swift; sourceTree = "<group>"; };
+		409402A02C14DBA700207CAE /* SubjectsExistingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectsExistingView.swift; sourceTree = "<group>"; };
 		4094C7752C0B81490049F539 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		40A3BD4A2C0BA678003560A3 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		40A46BAC2C13CDC5002D983A /* Subject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subject.swift; sourceTree = "<group>"; };
@@ -131,6 +137,9 @@
 				4015A0412C0A489200620DC3 /* SignUpView.swift */,
 				40782CB32C0CAFFB004E923C /* ProfileView.swift */,
 				404A98F22C149B5200A35E28 /* AddSubjectView.swift */,
+				4094029C2C14DB0200207CAE /* NoSubjectsView.swift */,
+				4094029E2C14DB3100207CAE /* SubjectDetailView.swift */,
+				409402A02C14DBA700207CAE /* SubjectsExistingView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -369,6 +378,8 @@
 				40A5D40A2C0658E500852CA6 /* ContentView.swift in Sources */,
 				408478D32C0FC2FC00B67DF6 /* StringCapitalisation.swift in Sources */,
 				40C319F52C0914CE00215518 /* FirstView.swift in Sources */,
+				4094029D2C14DB0200207CAE /* NoSubjectsView.swift in Sources */,
+				4094029F2C14DB3100207CAE /* SubjectDetailView.swift in Sources */,
 				408478D02C0FC0BC00B67DF6 /* ColorHex.swift in Sources */,
 				4015A0422C0A489200620DC3 /* SignUpView.swift in Sources */,
 				40A5D4342C07C6C300852CA6 /* HomeView.swift in Sources */,
@@ -379,6 +390,7 @@
 				40CE7C552C0BC106005489AD /* User.swift in Sources */,
 				404A98F12C1493D900A35E28 /* SubjectViewModel.swift in Sources */,
 				40782CB42C0CAFFB004E923C /* ProfileView.swift in Sources */,
+				409402A12C14DBA700207CAE /* SubjectsExistingView.swift in Sources */,
 				40A3BD4B2C0BA678003560A3 /* AuthViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
