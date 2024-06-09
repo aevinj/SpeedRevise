@@ -24,7 +24,7 @@ struct SubjectsView: View {
                             .padding(EdgeInsets(top: 32, leading: 32, bottom: 0, trailing: 0))
                         
                         Spacer()
-                    }
+                    }	
                     
                     if subjectViewModel.subjects.isEmpty {
                         NoSubjectsView()

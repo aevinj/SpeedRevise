@@ -30,22 +30,12 @@ struct NoSubjectsView: View {
             
             Spacer()
             
-            ZStack {
-                HStack {
-                    Spacer()
-                    
-                    Image("cobweb")
-                        .renderingMode(.template)
-                        .foregroundStyle(colorScheme == .dark ? Color(hex: "34373B") : Color(hex: "E6E6E6"))
-                }
-                
-                NavigationLink(destination: AddSubjectView()) {
-                    Text("Add a new subject")
-                        .frame(width: UIScreen.main.bounds.width - 70, height: 70)
-                        .background(Color.primary)
-                        .foregroundStyle(Color.background)
-                        .clipShape(RoundedRectangle(cornerRadius: 25))
-                }
+            NavigationLink(destination: AddSubjectView()) {
+                Text("Add a new subject")
+                    .frame(width: UIScreen.main.bounds.width - 70, height: 70)
+                    .background(Color.primary)
+                    .foregroundStyle(Color.background)
+                    .clipShape(RoundedRectangle(cornerRadius: 25))
             }
             .padding(.bottom, 100)
         }

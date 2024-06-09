@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct AddSubjectView: View {
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) var dismiss
     @EnvironmentObject var subjectViewModel: SubjectViewModel
     @State private var subjectName: String = ""
 
@@ -21,7 +21,7 @@ struct AddSubjectView: View {
             Button(action: {
                 Task {
                     await subjectViewModel.addSubject(name: subjectName)
-                    presentationMode.wrappedValue.dismiss()
+                    dismiss()
                 }
             }, label: {
                 Text("Save Subject")

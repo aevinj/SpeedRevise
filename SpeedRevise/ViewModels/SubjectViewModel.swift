@@ -53,4 +53,5 @@ class SubjectViewModel : ObservableObject {
             print("Error deleting subject: \(error.localizedDescription)")
         }
     }
+    
 }

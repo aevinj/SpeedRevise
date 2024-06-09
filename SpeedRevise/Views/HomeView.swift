@@ -48,13 +48,13 @@ struct HomeView: View {
                         Image(systemName: notificationCount > 0 ? "bell.badge.fill" : "bell.fill")
                             .symbolRenderingMode(.palette)
                             .foregroundStyle(Color.blue, colorScheme == .dark ? Color.white : Color.black)
-                            .font(.system(size: 30))
+                            .font(.system(size: 24))
                             .foregroundStyle(Color.primary)
                             .shadow(radius: 70)
-                            .frame(width: 75, height: 75)
+                            .frame(width: 64, height: 64)
                             .background(.ultraThinMaterial)
                             .clipShape(RoundedRectangle(cornerRadius: 25))
-                            .padding(.trailing, 30)
+                            .padding(.trailing, 32)
                     })
                 }
                 

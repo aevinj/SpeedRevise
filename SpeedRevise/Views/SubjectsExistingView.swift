@@ -20,7 +20,7 @@ struct SubjectsExistingView: View {
                                 .font(.system(size: 20))
                                 .foregroundStyle(Color.background)
                             
-                            Text("Number of topics: \(subject.topics.count)")
+                            Text("Topics: \(subject.topics.count)")
                                 .font(.system(size: 14))
                                 .foregroundStyle(Color.gray)
                         }
@@ -35,7 +35,7 @@ struct SubjectsExistingView: View {
             }
             .scrollContentBackground(.hidden)
             .listStyle(InsetGroupedListStyle())
-            .padding(.top, 20)
+            .padding(.top, 16)
             
             Spacer()
             

@@ -31,7 +31,8 @@ struct Note: Identifiable, Codable {
 struct Quiz: Identifiable, Codable {
     let id: String
     var name: String
-    var questions: [Question]
+    var questions: String
+    var answers: String
     let creationDate: Date
     let difficulty: Difficulty
 }
@@ -40,10 +41,4 @@ enum Difficulty: String, Codable {
     case easy
     case medium
     case hard
-}
-
-struct Question: Identifiable, Codable {
-    let id: String
-    let question: String
-    let answer: String
 }
