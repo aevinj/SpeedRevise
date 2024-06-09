@@ -60,7 +60,7 @@ struct SubjectDetailView: View {
                 if subject.topics.isEmpty {
                     NoTopicsView()
                 } else {
-                    ExistingTopicsView(topics: subject.topics)
+                    ExistingTopicsView(topics: subject.topics, subject: subject)
                 }
             }
         }
@@ -71,6 +71,7 @@ struct SubjectDetailView: View {
 struct TopicDetailView: View {
     @Environment(\.dismiss) var dismiss
     var topic: Topic
+    var subject: Subject
     
     var body: some View {
         VStack {
@@ -80,18 +81,18 @@ struct TopicDetailView: View {
             } label: {
                 Text("return")
             }
-
         }
     }
 }
 
 struct ExistingTopicsView: View {
     var topics: [Topic]
+    var subject: Subject
     
     var body: some View {
         VStack {
             List(topics) { topic in
-                NavigationLink(destination: TopicDetailView(topic: topic)) {
+                NavigationLink(destination: TopicDetailView(topic: topic, subject: subject)) {
                     HStack {
                         VStack (alignment: .leading) {
                             Text(topic.name)
