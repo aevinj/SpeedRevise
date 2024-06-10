@@ -46,16 +46,16 @@ struct AddTopicView: View {
                         VStack(alignment: .leading) {
                             ForEach(openAIViewModel.messages, id: \.content) { message in
                                 HStack {
-                                    if message.role == "assistant" {
+                                    if message.role == .assistant {
                                         Spacer()
                                     }
                                     
-                                    Text(message.role == "user" ? "You: \(message.content)" : "Assistant: \(message.content)")
+                                    Text(message.content)
                                         .padding()
-                                        .background(message.role == "user" ? Color.blue.opacity(0.2) : Color.green.opacity(0.2))
+                                        .background(message.role == .user ? Color.blue.opacity(0.2) : Color.green.opacity(0.2))
                                         .cornerRadius(10)
                                     
-                                    if message.role == "user" {
+                                    if message.role == .user {
                                         Spacer()
                                     }
                                 }
@@ -81,6 +81,7 @@ struct AddTopicView: View {
                                 .clipShape(RoundedRectangle(cornerRadius: 20))
                                 .padding(.trailing, 16)
                         }
+                        .disabled(openAIViewModel.isLoading)
                     }
                     .padding(.bottom, 100)
                 }

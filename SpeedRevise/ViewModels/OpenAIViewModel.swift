@@ -17,7 +17,7 @@ class OpenAIViewModel: ObservableObject {
 
     func sendMessage(content: String) {
         isLoading = true
-        let userMessage = OpenAIMessage(role: "user", content: content)
+        let userMessage = OpenAIMessage(role: .user, content: content)
         messages.append(userMessage)
         
         fetchChatResponse(messages: messages) { result in
