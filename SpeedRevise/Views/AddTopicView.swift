@@ -9,7 +9,8 @@ import SwiftUI
 
 struct AddTopicView: View {
     @Environment(\.dismiss) var dismiss
-    @StateObject private var chatViewModel = ChatViewModel()
+    @StateObject private var openAIViewModel = OpenAIViewModel()
+    @State var prompt: String = ""
     
         var body: some View {
             ZStack {
@@ -42,17 +43,33 @@ struct AddTopicView: View {
                     Spacer()
     
                     ScrollView {
-                        ForEach(chatViewModel.messages.filter({$0.role != .system}), id: \.id) { message in
-                            MessageView(message: message)
+                        VStack(alignment: .leading) {
+                            ForEach(openAIViewModel.messages, id: \.content) { message in
+                                HStack {
+                                    if message.role == "assistant" {
+                                        Spacer()
+                                    }
+                                    
+                                    Text(message.role == "user" ? "You: \(message.content)" : "Assistant: \(message.content)")
+                                        .padding()
+                                        .background(message.role == "user" ? Color.blue.opacity(0.2) : Color.green.opacity(0.2))
+                                        .cornerRadius(10)
+                                    
+                                    if message.role == "user" {
+                                        Spacer()
+                                    }
+                                }
+                            }
                         }
                     }
     
                     HStack {
-                        TextInputView(textInput: $chatViewModel.currentInput, prompt: "Enter a topic to revise...")
+                        TextInputView(textInput: $openAIViewModel.userResponse, prompt: "Enter a topic to revise...")
                             .padding(.trailing, 2)
     
                         Button {
-                            chatViewModel.sendMessage()
+                            openAIViewModel.sendMessage(content: openAIViewModel.userResponse)
+                            openAIViewModel.userResponse = ""
                         } label: {
                             Image(systemName: "chevron.right")
                                 .foregroundStyle(Color("BGCFlipped"))
@@ -70,23 +87,6 @@ struct AddTopicView: View {
             }
             .navigationBarBackButtonHidden(true)
         }
-}
-
-struct MessageView: View {
-    var message: Message
-    var body: some View {
-        HStack {
-            if message.role == .user {
-                Spacer()
-            }
-            
-            Text(message.content)
-            
-            if message.role == .assistant {
-                Spacer()
-            }
-        }
-    }
 }
 
 #Preview {

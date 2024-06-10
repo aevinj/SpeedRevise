@@ -38,10 +38,9 @@
 		40CE7C552C0BC106005489AD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CE7C542C0BC106005489AD /* User.swift */; };
 		40D7FA6F2C11FD6700326284 /* SubjectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D7FA6E2C11FD6700326284 /* SubjectsView.swift */; };
 		40EC2F502C0A86AB00AFA2AF /* TextInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EC2F4F2C0A86AA00AFA2AF /* TextInputView.swift */; };
-		40FF4B632C172F0300E6E8B5 /* ChatViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FF4B622C172F0300E6E8B5 /* ChatViewModel.swift */; };
-		40FF4B6A2C1743D200E6E8B5 /* Alamofire in Frameworks */ = {isa = PBXBuildFile; productRef = 40FF4B692C1743D200E6E8B5 /* Alamofire */; };
-		40FF4B6C2C17445900E6E8B5 /* OpenAIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FF4B6B2C17445900E6E8B5 /* OpenAIService.swift */; };
+		40FF4B632C172F0300E6E8B5 /* OpenAIViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FF4B622C172F0300E6E8B5 /* OpenAIViewModel.swift */; };
 		40FF4B6E2C17457500E6E8B5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FF4B6D2C17457500E6E8B5 /* Constants.swift */; };
+		40FF4B702C1760E900E6E8B5 /* OpenAIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FF4B6F2C1760E900E6E8B5 /* OpenAIModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,9 +91,9 @@
 		40CE7C542C0BC106005489AD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		40D7FA6E2C11FD6700326284 /* SubjectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectsView.swift; sourceTree = "<group>"; };
 		40EC2F4F2C0A86AA00AFA2AF /* TextInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInputView.swift; sourceTree = "<group>"; };
-		40FF4B622C172F0300E6E8B5 /* ChatViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewModel.swift; sourceTree = "<group>"; };
-		40FF4B6B2C17445900E6E8B5 /* OpenAIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIService.swift; sourceTree = "<group>"; };
+		40FF4B622C172F0300E6E8B5 /* OpenAIViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIViewModel.swift; sourceTree = "<group>"; };
 		40FF4B6D2C17457500E6E8B5 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		40FF4B6F2C1760E900E6E8B5 /* OpenAIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,7 +101,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				40FF4B6A2C1743D200E6E8B5 /* Alamofire in Frameworks */,
 				4094C76E2C0B7E520049F539 /* FirebaseAuth in Frameworks */,
 				4094C7742C0B7E520049F539 /* FirebaseStorage in Frameworks */,
 				4094C7702C0B7E520049F539 /* FirebaseFirestore in Frameworks */,
@@ -160,8 +158,7 @@
 			children = (
 				40A3BD4A2C0BA678003560A3 /* AuthViewModel.swift */,
 				404A98F02C1493D900A35E28 /* SubjectViewModel.swift */,
-				40FF4B622C172F0300E6E8B5 /* ChatViewModel.swift */,
-				40FF4B6B2C17445900E6E8B5 /* OpenAIService.swift */,
+				40FF4B622C172F0300E6E8B5 /* OpenAIViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -171,6 +168,7 @@
 			children = (
 				40CE7C542C0BC106005489AD /* User.swift */,
 				40A46BAC2C13CDC5002D983A /* Subject.swift */,
+				40FF4B6F2C1760E900E6E8B5 /* OpenAIModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -267,7 +265,6 @@
 				4094C76F2C0B7E520049F539 /* FirebaseFirestore */,
 				4094C7712C0B7E520049F539 /* FirebaseFirestoreSwift */,
 				4094C7732C0B7E520049F539 /* FirebaseStorage */,
-				40FF4B692C1743D200E6E8B5 /* Alamofire */,
 			);
 			productName = SpeedRevise;
 			productReference = 40A5D4042C0658E500852CA6 /* SpeedRevise.app */;
@@ -343,7 +340,6 @@
 			mainGroup = 40A5D3FB2C0658E500852CA6;
 			packageReferences = (
 				4094C76C2C0B7E520049F539 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
-				40FF4B682C1743D200E6E8B5 /* XCRemoteSwiftPackageReference "Alamofire" */,
 			);
 			productRefGroup = 40A5D4052C0658E500852CA6 /* Products */;
 			projectDirPath = "";
@@ -401,6 +397,7 @@
 				4015A0422C0A489200620DC3 /* SignUpView.swift in Sources */,
 				40A5D4342C07C6C300852CA6 /* HomeView.swift in Sources */,
 				40A5D4082C0658E500852CA6 /* SpeedReviseApp.swift in Sources */,
+				40FF4B702C1760E900E6E8B5 /* OpenAIModel.swift in Sources */,
 				40EC2F502C0A86AB00AFA2AF /* TextInputView.swift in Sources */,
 				40D7FA6F2C11FD6700326284 /* SubjectsView.swift in Sources */,
 				40A5D4322C07AEA000852CA6 /* NavBarView.swift in Sources */,
@@ -409,8 +406,7 @@
 				40FF4B6E2C17457500E6E8B5 /* Constants.swift in Sources */,
 				40782CB42C0CAFFB004E923C /* ProfileView.swift in Sources */,
 				409402A12C14DBA700207CAE /* SubjectsExistingView.swift in Sources */,
-				40FF4B6C2C17445900E6E8B5 /* OpenAIService.swift in Sources */,
-				40FF4B632C172F0300E6E8B5 /* ChatViewModel.swift in Sources */,
+				40FF4B632C172F0300E6E8B5 /* OpenAIViewModel.swift in Sources */,
 				40A3BD4B2C0BA678003560A3 /* AuthViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -751,14 +747,6 @@
 				minimumVersion = 10.27.0;
 			};
 		};
-		40FF4B682C1743D200E6E8B5 /* XCRemoteSwiftPackageReference "Alamofire" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/Alamofire/Alamofire.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.9.1;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -781,11 +769,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 4094C76C2C0B7E520049F539 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
-		};
-		40FF4B692C1743D200E6E8B5 /* Alamofire */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 40FF4B682C1743D200E6E8B5 /* XCRemoteSwiftPackageReference "Alamofire" */;
-			productName = Alamofire;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
