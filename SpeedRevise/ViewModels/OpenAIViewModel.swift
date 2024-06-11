@@ -14,9 +14,16 @@ class OpenAIViewModel: ObservableObject {
     @Published var feedback: String = ""
     @Published var isLoading: Bool = false
     private var endpoint = "https://api.openai.com/v1/chat/completions"
-
+    
+    func initialiseQuiz(startPrompt: String, difficulty: Int) {
+        let instruction = "You are an assistant who's aim is to test the user's knowledge on a specific topic. You do not ask/say anything other than questions about the topic and analysis of the user's answers to your questions. Do not provide greeting messages or any unnecessary text. You generate questions of a difficulty of \(String(difficulty)) on a scale of 1 to 5 where 1 is easy and 5 is very hard."
+        let initialMessage = OpenAIMessage(role: .system, content: instruction)
+        messages.append(initialMessage)
+    }
+    
     func sendMessage(content: String) {
         isLoading = true
+        
         let userMessage = OpenAIMessage(role: .user, content: content)
         messages.append(userMessage)
         
