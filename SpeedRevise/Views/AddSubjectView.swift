@@ -18,6 +18,17 @@ struct AddSubjectView: View {
                 .padding()
                 .textFieldStyle(RoundedBorderTextFieldStyle())
 
+            Button {
+                dismiss()
+            } label: {
+                Text("Take me back")
+                    .frame(width: UIScreen.main.bounds.width - 70, height: 70)
+                    .background(.gray)
+                    .foregroundStyle(Color.white)
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+            }
+
+            
             Button(action: {
                 Task {
                     await subjectViewModel.addSubject(name: subjectName)

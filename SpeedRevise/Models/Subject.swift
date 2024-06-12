@@ -37,8 +37,10 @@ struct Quiz: Identifiable, Codable {
     let difficulty: Difficulty
 }
 
-enum Difficulty: String, Codable {
+enum Difficulty: String, Codable, CaseIterable, Identifiable{
     case easy
     case medium
     case hard
+    
+    var id: Self {self}
 }

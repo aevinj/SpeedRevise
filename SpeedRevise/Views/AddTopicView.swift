@@ -12,8 +12,11 @@ struct AddTopicView: View {
     @StateObject private var openAIViewModel = OpenAIViewModel()
     @State var prompt: String = ""
     @State private var tempQuiz = true
+    @State private var currQuiz = "New topic"
     @State private var showSettings = false
     @State private var rotationAngle: Double = 0
+    @State private var difficulty: Difficulty = .medium
+    @State private var filteredMessages: [OpenAIMessage] = []
     
     var body: some View {
         ZStack {
@@ -58,7 +61,7 @@ struct AddTopicView: View {
                     
                     Spacer()
                     
-                    Text("New topic")
+                    Text(currQuiz)
                         .font(.system(size: 32, weight: .medium))
                         .padding(.trailing, 16)
                 }
@@ -68,7 +71,7 @@ struct AddTopicView: View {
                 
                 ScrollView {
                     VStack(alignment: .leading) {
-                        ForEach(openAIViewModel.messages, id: \.content) { message in
+                        ForEach(filteredMessages, id: \.content) { message in
                             Text(message.content)
                                 .frame(width: UIScreen.main.bounds.width - 70)
                                 .padding()
@@ -78,14 +81,55 @@ struct AddTopicView: View {
                         }
                     }
                 }
+                .padding(.bottom, 2)
+                
+                if openAIViewModel.isNotIntialised() {
+                    Picker("Difficulty", selection: $difficulty) {
+                        ForEach(Difficulty.allCases) { diff in
+                            Text(diff.rawValue.capitalizedFirst)
+                        }
+                    }
+                    .pickerStyle(SegmentedPickerStyle())
+                    .padding()
+                }
                 
                 HStack {
-                    TextInputView(textInput: $openAIViewModel.userResponse, prompt: "Enter a topic to revise...")
-                        .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 2))
-                    
+                    Group {
+                        if openAIViewModel.isNotIntialised() {
+                            TextInputView(textInput: $openAIViewModel.userResponse, prompt: "Enter a topic to revise...")
+                        } else {
+                            TextInputView(textInput: $openAIViewModel.userResponse, prompt: "Enter your answer...")
+                        }
+                    }
+                    .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 2))
+                                        
                     Button {
-                        openAIViewModel.sendMessage(content: openAIViewModel.userResponse)
-                        openAIViewModel.userResponse = ""
+                        if openAIViewModel.isNotIntialised() {
+                            currQuiz = openAIViewModel.userResponse.lowercased().capitalizedFirst
+                            openAIViewModel.initialiseQuiz(difficulty: difficulty)
+
+                            openAIViewModel.generateQuestion {
+                                openAIViewModel.userResponse = ""
+                                filteredMessages.append(openAIViewModel.messages.last!)
+                            }
+                            
+                        } else {
+                            // add user's answer to previous question to view
+                            let userMessage = OpenAIMessage(role: .user, content: openAIViewModel.userResponse)
+                            filteredMessages.append(userMessage)
+                            
+                            // add AI analysis on previous question to view
+                            openAIViewModel.performAnalysisOnUserResponse {
+                                filteredMessages.append(openAIViewModel.messages.last!)
+                                openAIViewModel.userResponse = ""
+                                
+                                // generate new question and add to view
+                                openAIViewModel.generateQuestion {
+                                    filteredMessages.append(openAIViewModel.messages.last!)
+                                }
+                            }
+                        }
+                        
                     } label: {
                         if openAIViewModel.isLoading {
                             Image(systemName: "chevron.right")
