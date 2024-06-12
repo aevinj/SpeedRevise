@@ -20,7 +20,7 @@ class OpenAIViewModel: ObservableObject {
     }
     
     func initialiseQuiz(difficulty: Difficulty) {
-        let instruction = "Your aim is to test the user's knowledge on the topic of \(userResponse). Don't provide confirmations/greetings/unnecessary information - simply ask questions and perform analysis on user's answers. Generate \(difficulty.rawValue) difficulty questions."
+        let instruction = "Your aim is to test the user's knowledge on the topic of \(userResponse). Don't provide confirmation replies to user input - simply ask questions and perform concise analysis on the user's answers. Generate questions of \(difficulty.rawValue) difficulty. If the user asks for the answer, tell them the answer concisely."
         
         messages.append(OpenAIMessage(role: .system, content: instruction))
     }
@@ -32,9 +32,16 @@ class OpenAIViewModel: ObservableObject {
         }
     }
     
+    func userUnsureOfAnswer(completion: @escaping () -> Void) {
+        Task {
+            await sendMessage(content: "Tell me the answer")
+            completion()
+        }
+    }
+    
     func generateQuestion(completion: @escaping () -> Void) {
         Task {
-            await sendMessage(content: "Generate an unseen question")
+            await sendMessage(content: "Generate an unseen question - do not show answer unless asked to")
             completion()
         }
     }
@@ -68,8 +75,8 @@ class OpenAIViewModel: ObservableObject {
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        request.setValue("Bearer \(Constants.openAIAPIKey)", forHTTPHeaderField: "Authorization")
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        request.addValue("Bearer \(Constants.openAIAPIKey)", forHTTPHeaderField: "Authorization")
         
         let chatRequest = OpenAIRequest(model: "gpt-3.5-turbo-16k", messages: messages)
         
