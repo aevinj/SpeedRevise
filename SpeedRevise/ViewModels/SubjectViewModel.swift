@@ -15,10 +15,6 @@ class SubjectViewModel : ObservableObject {
     
     private let db = Firestore.firestore()
     
-    init() {
-        fetchSubjects()
-    }
-    
     func fetchSubjects() {
         guard let userId = Auth.auth().currentUser?.uid else { return }
         db.collection("users").document(userId).collection("subjects").getDocuments { snapshot, error in

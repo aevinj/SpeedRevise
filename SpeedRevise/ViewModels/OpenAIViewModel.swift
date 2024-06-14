@@ -11,6 +11,7 @@ import Combine
 @MainActor
 class OpenAIViewModel: ObservableObject {
     @Published var messages: [OpenAIMessage] = []
+    @Published var filteredMessages: [FilteredMessage] = []
     @Published var userResponse: String = ""
     @Published var isLoading: Bool = false
     private var endpoint = "https://api.openai.com/v1/chat/completions"

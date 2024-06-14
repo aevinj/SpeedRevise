@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct FilteredMessage {
+struct FilteredMessage: Identifiable, Codable {
     let id: UUID
     let role: OpenAIRoles
     let content: String

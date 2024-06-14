@@ -23,6 +23,7 @@
 		4094C7722C0B7E520049F539 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 4094C7712C0B7E520049F539 /* FirebaseFirestoreSwift */; };
 		4094C7742C0B7E520049F539 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 4094C7732C0B7E520049F539 /* FirebaseStorage */; };
 		4094C7762C0B81490049F539 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4094C7752C0B81490049F539 /* GoogleService-Info.plist */; };
+		409705942C1CD164009E3431 /* AccountSettingsMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409705932C1CD164009E3431 /* AccountSettingsMenuView.swift */; };
 		40A3BD4B2C0BA678003560A3 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A3BD4A2C0BA678003560A3 /* AuthViewModel.swift */; };
 		40A46BAD2C13CDC5002D983A /* Subject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A46BAC2C13CDC5002D983A /* Subject.swift */; };
 		40A5D4082C0658E500852CA6 /* SpeedReviseApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40A5D4072C0658E500852CA6 /* SpeedReviseApp.swift */; };
@@ -38,6 +39,7 @@
 		40C319F52C0914CE00215518 /* FirstView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C319F42C0914CE00215518 /* FirstView.swift */; };
 		40CE7C552C0BC106005489AD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CE7C542C0BC106005489AD /* User.swift */; };
 		40D7FA6F2C11FD6700326284 /* SubjectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D7FA6E2C11FD6700326284 /* SubjectsView.swift */; };
+		40D923782C1B6467000D2659 /* TempTopicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D923772C1B6467000D2659 /* TempTopicView.swift */; };
 		40EC2F502C0A86AB00AFA2AF /* TextInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EC2F4F2C0A86AA00AFA2AF /* TextInputView.swift */; };
 		40FF4B632C172F0300E6E8B5 /* OpenAIViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FF4B622C172F0300E6E8B5 /* OpenAIViewModel.swift */; };
 		40FF4B6E2C17457500E6E8B5 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FF4B6D2C17457500E6E8B5 /* Constants.swift */; };
@@ -74,6 +76,7 @@
 		4094029E2C14DB3100207CAE /* SubjectDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectDetailView.swift; sourceTree = "<group>"; };
 		409402A02C14DBA700207CAE /* SubjectsExistingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectsExistingView.swift; sourceTree = "<group>"; };
 		4094C7752C0B81490049F539 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		409705932C1CD164009E3431 /* AccountSettingsMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSettingsMenuView.swift; sourceTree = "<group>"; };
 		40A3BD4A2C0BA678003560A3 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		40A46BAC2C13CDC5002D983A /* Subject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subject.swift; sourceTree = "<group>"; };
 		40A5D4042C0658E500852CA6 /* SpeedRevise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpeedRevise.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -92,6 +95,7 @@
 		40C319F42C0914CE00215518 /* FirstView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstView.swift; sourceTree = "<group>"; };
 		40CE7C542C0BC106005489AD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		40D7FA6E2C11FD6700326284 /* SubjectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectsView.swift; sourceTree = "<group>"; };
+		40D923772C1B6467000D2659 /* TempTopicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TempTopicView.swift; sourceTree = "<group>"; };
 		40EC2F4F2C0A86AA00AFA2AF /* TextInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInputView.swift; sourceTree = "<group>"; };
 		40FF4B622C172F0300E6E8B5 /* OpenAIViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIViewModel.swift; sourceTree = "<group>"; };
 		40FF4B6D2C17457500E6E8B5 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -144,9 +148,11 @@
 				402BDC582C0A275B001587D7 /* LogInView.swift */,
 				40C319F42C0914CE00215518 /* FirstView.swift */,
 				40A5D4332C07C6C300852CA6 /* HomeView.swift */,
+				40D923772C1B6467000D2659 /* TempTopicView.swift */,
 				40A5D4092C0658E500852CA6 /* ContentView.swift */,
 				4015A0412C0A489200620DC3 /* SignUpView.swift */,
 				40782CB32C0CAFFB004E923C /* ProfileView.swift */,
+				409705932C1CD164009E3431 /* AccountSettingsMenuView.swift */,
 				404A98F22C149B5200A35E28 /* AddSubjectView.swift */,
 				4094029C2C14DB0200207CAE /* NoSubjectsView.swift */,
 				4094029E2C14DB3100207CAE /* SubjectDetailView.swift */,
@@ -397,10 +403,12 @@
 				4094029F2C14DB3100207CAE /* SubjectDetailView.swift in Sources */,
 				408478D02C0FC0BC00B67DF6 /* ColorHex.swift in Sources */,
 				40B5104F2C18B4650019A55D /* TopicSettingsMenuView.swift in Sources */,
+				40D923782C1B6467000D2659 /* TempTopicView.swift in Sources */,
 				40429B322C1648D000BD3D69 /* AddTopicView.swift in Sources */,
 				4015A0422C0A489200620DC3 /* SignUpView.swift in Sources */,
 				40A5D4342C07C6C300852CA6 /* HomeView.swift in Sources */,
 				40A5D4082C0658E500852CA6 /* SpeedReviseApp.swift in Sources */,
+				409705942C1CD164009E3431 /* AccountSettingsMenuView.swift in Sources */,
 				40FF4B702C1760E900E6E8B5 /* OpenAIModel.swift in Sources */,
 				40EC2F502C0A86AB00AFA2AF /* TextInputView.swift in Sources */,
 				40D7FA6F2C11FD6700326284 /* SubjectsView.swift in Sources */,
@@ -572,6 +580,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SpeedRevise/Preview Content\"";
@@ -592,6 +601,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = AJ.SpeedRevise;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
@@ -607,6 +617,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"SpeedRevise/Preview Content\"";
@@ -627,6 +638,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = AJ.SpeedRevise;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
 				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;

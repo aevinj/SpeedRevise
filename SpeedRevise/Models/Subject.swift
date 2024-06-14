@@ -31,8 +31,7 @@ struct Note: Identifiable, Codable {
 struct Quiz: Identifiable, Codable {
     let id: String
     var name: String
-    var questions: String
-    var answers: String
+    let content: [FilteredMessage]
     let creationDate: Date
     let difficulty: Difficulty
 }
