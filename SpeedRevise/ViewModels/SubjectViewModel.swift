@@ -12,12 +12,17 @@ import Firebase
 @MainActor
 class SubjectViewModel : ObservableObject {
     @Published var subjects: [Subject] = []
+    @Published var topics: [Topic] = []
     
     private let db = Firestore.firestore()
+    private var userID = Auth.auth().currentUser?.uid ?? nil
+    
+    func updateUserID() {
+        userID = Auth.auth().currentUser!.uid
+    }
     
     func fetchSubjects() {
-        guard let userId = Auth.auth().currentUser?.uid else { return }
-        db.collection("users").document(userId).collection("subjects").getDocuments { snapshot, error in
+        db.collection("users").document(userID!).collection("subjects").getDocuments { snapshot, error in
             if let error = error {
                 print("Error fetching subjects: \(error.localizedDescription)")
                 return
@@ -29,11 +34,10 @@ class SubjectViewModel : ObservableObject {
     }
     
     func addSubject(name: String) async {
-        guard let userId = Auth.auth().currentUser?.uid else { return }
-        let newSubject = Subject(id: UUID().uuidString, name: name, topics: [])
+        let newSubject = Subject(name: name)
         do {
             let encodedSubject = try Firestore.Encoder().encode(newSubject)
-            try await db.collection("users").document(userId).collection("subjects").document(newSubject.id).setData(encodedSubject)
+            try await db.collection("users").document(userID!).collection("subjects").document(newSubject.id).setData(encodedSubject)
             self.subjects.append(newSubject)
         } catch {
             print("Error adding subject: \(error.localizedDescription)")
@@ -41,13 +45,34 @@ class SubjectViewModel : ObservableObject {
     }
     
     func deleteSubject(subject: Subject) async {
-        guard let userId = Auth.auth().currentUser?.uid else { return }
         do {
-            try await db.collection("users").document(userId).collection("subjects").document(subject.id).delete()
+            try await db.collection("users").document(userID!).collection("subjects").document(subject.id).delete()
             self.subjects.removeAll { $0.id == subject.id }
         } catch {
             print("Error deleting subject: \(error.localizedDescription)")
         }
     }
     
+    func fetchTopics(subjectID: String) {
+        db.collection("users").document(userID!).collection("subjects").document(subjectID).collection("topics").getDocuments { snapshot, error in
+            if let error = error {
+                print("Error fetching topics: \(error.localizedDescription)")
+                return
+            }
+            
+            guard let documents = snapshot?.documents else { return }
+            self.topics = documents.compactMap { try? $0.data(as: Topic.self) }
+        }
+    }
+    
+    func addTopic(subjectID: String, topicName: String) async {
+        let newTopic = Topic(name: topicName)
+        do {
+            let encodedTopic = try Firestore.Encoder().encode(newTopic)
+            try await db.collection("users").document(userID!).collection("subjects").document(subjectID).collection("topics").document(newTopic.id).setData(encodedTopic)
+            self.topics.append(newTopic)
+        } catch {
+            print("Error adding subject: \(error.localizedDescription)")
+        }
+    }
 }

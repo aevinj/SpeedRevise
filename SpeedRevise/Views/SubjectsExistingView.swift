@@ -13,14 +13,16 @@ struct SubjectsExistingView: View {
     var body: some View {
         VStack {
             List(subjectViewModel.subjects) { subject in
-                NavigationLink(destination: SubjectDetailView(subject: subject)) {
+                NavigationLink(destination: SubjectDetailView(subject: subject).onAppear(perform: {
+                    subjectViewModel.fetchTopics(subjectID: subject.id)
+                })) {
                     HStack {
                         VStack (alignment: .leading) {
                             Text(subject.name)
                                 .font(.system(size: 20))
                                 .foregroundStyle(Color.background)
                             
-                            Text("Topics: \(subject.topics.count)")
+                            Text("IMPLEMENT last accessed:")
                                 .font(.system(size: 14))
                                 .foregroundStyle(Color.gray)
                         }

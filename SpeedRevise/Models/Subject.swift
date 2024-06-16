@@ -8,16 +8,21 @@
 import Foundation
 
 struct Subject: Identifiable, Codable {
+    init(name: String) {
+        self.id = UUID().uuidString
+        self.name = name
+    }
     let id: String
     var name: String
-    var topics: [Topic]
 }
 
 struct Topic: Identifiable, Codable {
+    init(name: String) {
+        self.id = UUID().uuidString
+        self.name = name
+    }
     let id: String
     let name: String
-    var notes: [Note]
-    var quizzes: [Quiz]
 }
 
 struct Note: Identifiable, Codable {
@@ -29,9 +34,19 @@ struct Note: Identifiable, Codable {
 }
 
 struct Quiz: Identifiable, Codable {
+    init(name: String, filteredContent: [FilteredMessage], unfilteredContent: [OpenAIMessage], difficulty: Difficulty) {
+        self.id = UUID().uuidString
+        self.name = name
+        self.filteredContent = filteredContent
+        self.unfilteredContent = unfilteredContent
+        self.creationDate = Date()
+        self.difficulty = difficulty
+    }
+    
     let id: String
     var name: String
-    let content: [FilteredMessage]
+    let filteredContent: [FilteredMessage]
+    let unfilteredContent: [OpenAIMessage]
     let creationDate: Date
     let difficulty: Difficulty
 }

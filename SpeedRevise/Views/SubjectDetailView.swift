@@ -57,10 +57,10 @@ struct SubjectDetailView: View {
                 }
                 .padding(EdgeInsets(top: 32, leading: 32, bottom: 0, trailing: 0))
                 
-                if subject.topics.isEmpty {
-                    NoTopicsView()
+                if subjectViewModel.topics.isEmpty {
+                    NoTopicsView(currSubjectID: subject.id)
                 } else {
-                    ExistingTopicsView(topics: subject.topics, subject: subject)
+                    ExistingTopicsView(currSubjectID: subject.id)
                 }
             }
         }
@@ -70,36 +70,53 @@ struct SubjectDetailView: View {
 
 struct TopicDetailView: View {
     @Environment(\.dismiss) var dismiss
+    @Environment(\.colorScheme) var colorScheme
     var topic: Topic
-    var subject: Subject
     
     var body: some View {
-        VStack {
-            Text(topic.name)
-            Button {
-                dismiss()
-            } label: {
-                Text("return")
+        ZStack {
+            Color("BackgroundColor")
+                .ignoresSafeArea()
+            
+            Image("leaves")
+                .renderingMode(.template)
+                .foregroundStyle(colorScheme == .dark ? Color(hex: "34373B") : Color(hex: "E6E6E6"))
+            
+            VStack {
+                Text(topic.name)
+                    .font(.title)
+                
+                Spacer()
+                
+                Button {
+                    dismiss()
+                } label: {
+                    Text("return")
+                        .frame(width: UIScreen.main.bounds.width - 70, height: 60)
+                        .background(.red)
+                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                }
+                .padding(.bottom, 100)
             }
         }
     }
 }
 
 struct ExistingTopicsView: View {
-    var topics: [Topic]
-    var subject: Subject
+    @EnvironmentObject private var subjectViewModel: SubjectViewModel
+    @State var currSubjectID: String
     
     var body: some View {
         VStack {
-            List(topics) { topic in
-                NavigationLink(destination: TopicDetailView(topic: topic, subject: subject)) {
+            List(subjectViewModel.topics) { topic in
+                NavigationLink(destination: TopicDetailView(topic: topic)) {
                     HStack {
                         VStack (alignment: .leading) {
                             Text(topic.name)
                                 .font(.system(size: 20))
                                 .foregroundStyle(Color.background)
                             
-                            Text("Saved notes: \(topic.notes.count)")
+                            Text("IMPLEMENT last accessed")
                                 .font(.system(size: 14))
                                 .foregroundStyle(Color.gray)
                         }
@@ -121,7 +138,7 @@ struct ExistingTopicsView: View {
             Button {
                 
             } label: {
-                NavigationLink(destination: AddSubjectView()) {
+                NavigationLink(destination: AddTopicView(currSubjectID: currSubjectID)) {
                     Text("Add a new topic")
                         .frame(width: UIScreen.main.bounds.width - 70, height: 70)
                         .background(Color.primary)
@@ -135,6 +152,8 @@ struct ExistingTopicsView: View {
 }
 
 struct NoTopicsView: View {
+    @State var currSubjectID: String
+    
     var body: some View {
         VStack {
             Spacer()
@@ -149,7 +168,7 @@ struct NoTopicsView: View {
             Button {
                 
             } label: {
-                NavigationLink(destination: AddTopicView()) {
+                NavigationLink(destination: AddTopicView(currSubjectID: currSubjectID)) {
                     Text("Add a new topic")
                         .frame(width: UIScreen.main.bounds.width - 70, height: 70)
                         .background(Color.primary)

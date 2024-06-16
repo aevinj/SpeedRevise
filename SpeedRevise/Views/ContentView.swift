@@ -17,7 +17,9 @@ struct ContentView: View {
                 LoggedInView()
                     .environmentObject(subjectViewModel)
                     .onAppear {
+                        subjectViewModel.updateUserID()
                         subjectViewModel.fetchSubjects()
+                        subjectViewModel.topics = []
                     }
             } else {
                 LogInView()

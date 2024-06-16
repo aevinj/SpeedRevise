@@ -11,16 +11,7 @@ struct NoSubjectsView: View {
     @Environment(\.colorScheme) var colorScheme
     
     var body: some View {
-        Group {
-            HStack {
-                Image("cobweb")
-                    .renderingMode(.template)
-                    .rotationEffect(.degrees(180))
-                    .foregroundStyle(colorScheme == .dark ? Color(hex: "34373B") : Color(hex: "E6E6E6"))
-                
-                Spacer()
-            }
-            
+        VStack {
             Spacer()
             
             Text("Seems a bit empty here...")
