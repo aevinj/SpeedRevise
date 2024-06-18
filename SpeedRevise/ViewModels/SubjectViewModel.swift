@@ -44,10 +44,10 @@ class SubjectViewModel : ObservableObject {
         }
     }
     
-    func deleteSubject(subject: Subject) async {
+    func deleteSubject(subjectID: String) async {
         do {
-            try await db.collection("users").document(userID!).collection("subjects").document(subject.id).delete()
-            self.subjects.removeAll { $0.id == subject.id }
+            try await db.collection("users").document(userID!).collection("subjects").document(subjectID).delete()
+            self.subjects.removeAll { $0.id == subjectID }
         } catch {
             print("Error deleting subject: \(error.localizedDescription)")
         }
@@ -75,4 +75,24 @@ class SubjectViewModel : ObservableObject {
             print("Error adding subject: \(error.localizedDescription)")
         }
     }
+    
+    func deleteTopic(subjectID: String, topicID: String) async {
+        do {
+            try await db.collection("users").document(userID!).collection("subjects").document(subjectID).collection("topics").document(topicID).delete()
+            self.topics.removeAll {$0.id == topicID}
+        } catch {
+            print("Error deleting topic: \(error.localizedDescription)")
+        }
+    }
 }
+
+
+
+
+
+
+
+
+
+
+

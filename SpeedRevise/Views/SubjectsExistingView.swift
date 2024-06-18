@@ -13,12 +13,12 @@ struct SubjectsExistingView: View {
     var body: some View {
         VStack {
             List(subjectViewModel.subjects) { subject in
-                NavigationLink(destination: SubjectDetailView(subject: subject).onAppear(perform: {
+                NavigationLink(destination: SubjectDetailView(currSubject: subject).onAppear(perform: {
                     subjectViewModel.fetchTopics(subjectID: subject.id)
-                })) {
+                }).navigationBarBackButtonHidden(true)) {
                     HStack {
                         VStack (alignment: .leading) {
-                            Text(subject.name)
+                            Text(subject.name.capitalizedFirst)
                                 .font(.system(size: 20))
                                 .foregroundStyle(Color.background)
                             
@@ -37,7 +37,7 @@ struct SubjectsExistingView: View {
             }
             .scrollContentBackground(.hidden)
             .listStyle(InsetGroupedListStyle())
-            .padding(.top, 16)
+            .padding()
             
             Spacer()
             

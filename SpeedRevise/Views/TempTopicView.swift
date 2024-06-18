@@ -54,7 +54,7 @@ struct TempTopicView: View {
                             .clipShape(RoundedRectangle(cornerRadius: 10))
                     }
                     .popover(isPresented: $showSettings, content: {
-                        TopicSettingsMenuView(tempQuiz: .constant(true), disableTempQuiz: true, openAIViewModel: openAIViewModel)
+                        QuizSettingsMenuView(tempQuiz: .constant(true), disableTempQuiz: true, openAIViewModel: openAIViewModel)
                     })
                     
                     Spacer()
@@ -174,6 +174,5 @@ struct TempTopicView: View {
                 }
             }
         }
-        .navigationBarBackButtonHidden(true)
     }
 }

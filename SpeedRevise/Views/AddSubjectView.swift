@@ -9,44 +9,42 @@ import SwiftUI
 
 struct AddSubjectView: View {
     @Environment(\.dismiss) var dismiss
+    @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var subjectViewModel: SubjectViewModel
     @State private var subjectName: String = ""
 
     var body: some View {
-        VStack {
-            TextField("Enter subject name", text: $subjectName)
-                .padding()
-                .textFieldStyle(RoundedBorderTextFieldStyle())
-
-            Button {
-                dismiss()
-            } label: {
-                Text("Take me back")
-                    .frame(width: UIScreen.main.bounds.width - 70, height: 70)
-                    .background(.gray)
-                    .foregroundStyle(Color.white)
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
-            }
-
+        ZStack {
+            Color("BackgroundColor")
+                .ignoresSafeArea()
             
-            Button(action: {
-                Task {
-                    await subjectViewModel.addSubject(name: subjectName)
-                    dismiss()
+            Image("leaves")
+                .renderingMode(.template)
+                .foregroundStyle(colorScheme == .dark ? Color(hex: "34373B") : Color(hex: "E6E6E6"))
+            
+            VStack {
+                Spacer()
+                
+                TextInputView(textInput: $subjectName, prompt: "Subject name")
+                
+                Spacer()
+                
+                Button {
+                    Task {
+                        await subjectViewModel.addSubject(name: subjectName)
+                        dismiss()
+                    }
+                } label: {
+                    Text("Add subject")
+                        .frame(width: UIScreen.main.bounds.width - 70, height: 70)
+                        .background(Color.primary)
+                        .foregroundStyle(Color.background)
+                        .clipShape(RoundedRectangle(cornerRadius: 25))
                 }
-            }, label: {
-                Text("Save Subject")
-                    .frame(maxWidth: .infinity, maxHeight: 50)
-                    .background(Color.blue)
-                    .foregroundColor(.white)
-                    .cornerRadius(10)
-                    .padding()
-            })
-
-            Spacer()
+                .padding(.bottom, 100)
+            }
         }
-        .navigationTitle("Add New Subject")
-        .padding()
+        
     }
 }
 

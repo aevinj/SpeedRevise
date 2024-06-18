@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct TopicSettingsMenuView: View {
+struct QuizSettingsMenuView: View {
     @Binding var tempQuiz: Bool
     @State var disableTempQuiz: Bool = false
     @StateObject var openAIViewModel: OpenAIViewModel

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct NOTAddTopicView: View {
+struct NewQuizView: View {
     @Environment(\.dismiss) private var dismiss
     @StateObject private var openAIViewModel: OpenAIViewModel = OpenAIViewModel()
     @State private var tempQuiz: Bool = true
@@ -37,25 +37,6 @@ struct NOTAddTopicView: View {
                             .clipShape(RoundedRectangle(cornerRadius: 10))
                             .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 2))
                     }
-                    
-                    Button {
-                        withAnimation(.easeInOut(duration: 0.3)) {
-                            rotationAngle += 90
-                        }
-                        showSettings.toggle()
-                    } label: {
-                        Image(systemName: showSettings ? "gearshape.fill" : "gearshape")
-                            .rotationEffect(.degrees(rotationAngle))
-                            .font(.system(size: 20, weight: .medium))
-                            .foregroundStyle(Color.primary)
-                            .shadow(radius: 50)
-                            .frame(width: 55, height: 55)
-                            .background(.ultraThinMaterial)
-                            .clipShape(RoundedRectangle(cornerRadius: 10))
-                    }
-                    .popover(isPresented: $showSettings, content: {
-                        TopicSettingsMenuView(tempQuiz: $tempQuiz, openAIViewModel: openAIViewModel)
-                    })
                     
                     Spacer()
                     

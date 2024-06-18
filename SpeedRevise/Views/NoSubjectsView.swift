@@ -21,7 +21,7 @@ struct NoSubjectsView: View {
             
             Spacer()
             
-            NavigationLink(destination: AddSubjectView()) {
+            NavigationLink(destination: AddSubjectView().navigationBarBackButtonHidden(true)) {
                 Text("Add a new subject")
                     .frame(width: UIScreen.main.bounds.width - 70, height: 70)
                     .background(Color.primary)

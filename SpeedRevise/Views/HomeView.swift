@@ -150,7 +150,7 @@ struct HomeView: View {
                     TempTopicView(
                         openAIViewModel: openAIViewModel,
                         quizName: quizName
-                    )
+                    ).navigationBarBackButtonHidden(true)
                 }
             }
         }
