@@ -47,7 +47,7 @@ struct ProfileView: View {
                             .padding(EdgeInsets(top: 32, leading: 0, bottom: 0, trailing: 50))
                     }
                     .popover(isPresented: $showSettings, content: {
-                        AccountSettingsMenuView(showSettings: $showSettings)
+                        AccountSettingsMenuView()
                     })
                 }
                 

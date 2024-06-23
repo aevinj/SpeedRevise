@@ -7,23 +7,17 @@
 
 import SwiftUI
 
-enum Destination: Hashable {
-    case tempTopicView
-}
-
 struct HomeView: View {
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject private var authViewModel: AuthViewModel
     @State private var notificationCount: Int = 1
     @State private var tempQuizEntry: String = ""
     @State private var shouldNavigate: Bool = false
-    @State private var openAIViewModel: OpenAIViewModel = OpenAIViewModel()
+    @EnvironmentObject private var openAIViewModel: OpenAIViewModel
     @State private var filteredMessages: [FilteredMessage] = []
-    @State private var quizName: String = ""
-    @State private var navigationPath = [Destination]()
     
     var body: some View {
-        NavigationStack(path: $navigationPath){
+        NavigationStack {
             ZStack {
                 Color("BackgroundColor")
                     .ignoresSafeArea()
@@ -78,9 +72,7 @@ struct HomeView: View {
                         
                         RoundedRectangle(cornerRadius: 50.0)
                             .fill(Color("BGCFlipped"))
-                            .ignoresSafeArea()
-                            .padding()
-                            .frame(width: nil, height: 575)
+                            .frame(width: UIScreen.main.bounds.width, height: 575)
                     }
                     .ignoresSafeArea()
                     
@@ -93,7 +85,6 @@ struct HomeView: View {
                             
                             Spacer()
                         }
-                        
                         
                         HStack {
                             HStack {
@@ -113,19 +104,18 @@ struct HomeView: View {
                             .background(Color(hex: "E6E6E6"))
                             .cornerRadius(10)
                             
-                            Button {
-                                self.quizName = tempQuizEntry
-                                openAIViewModel.userResponse = tempQuizEntry
-                                tempQuizEntry = ""
-                                
-                                openAIViewModel.initialiseQuiz(difficulty: .medium)
-                                
-                                openAIViewModel.generateQuestion {
-                                    openAIViewModel.filteredMessages.append(FilteredMessage(from: openAIViewModel.messages.last!, isQuestion: true))
-                                    openAIViewModel.userResponse = ""
-                                    
-                                    navigationPath.append(.tempTopicView)
-                                }
+                            NavigationLink {
+                                QuizView(quizName: tempQuizEntry, tempQuiz: true, disableTempChoice: true)
+                                    .navigationBarBackButtonHidden(true)
+                                    .onAppear {
+                                        openAIViewModel.initialiseQuiz(difficulty: .medium, desiredTopic: tempQuizEntry)
+                                        tempQuizEntry = ""
+                                        
+                                        openAIViewModel.generateQuestion {
+                                            openAIViewModel.filteredMessages.append(FilteredMessage(from: openAIViewModel.messages.last!, isQuestion: true))
+                                            openAIViewModel.userResponse = ""
+                                        }
+                                    }
                             } label: {
                                 Image(systemName: "chevron.right")
                                     .font(.system(size: 20, weight: .medium))
@@ -135,22 +125,12 @@ struct HomeView: View {
                                     .background(Color(hex: "E6E6E6"))
                                     .clipShape(RoundedRectangle(cornerRadius: 10))
                             }
-                            
                         }
                         .padding(.bottom, 10)
                         
                         Group {}
                             .padding(.bottom, 100)
                     }
-                }
-            }
-            .navigationDestination(for: Destination.self) { destination in
-                switch destination {
-                case .tempTopicView:
-                    TempTopicView(
-                        openAIViewModel: openAIViewModel,
-                        quizName: quizName
-                    ).navigationBarBackButtonHidden(true)
                 }
             }
         }

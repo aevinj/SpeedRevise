@@ -20,9 +20,14 @@ struct ContentView: View {
                         subjectViewModel.updateUserID()
                         subjectViewModel.fetchSubjects()
                         subjectViewModel.topics = []
+                        subjectViewModel.quizzes = []
                     }
             } else {
                 LogInView()
+                    .onAppear {
+                        authViewModel.userSession = nil
+                        authViewModel.currentUser = nil
+                    }
             }
         }
     }

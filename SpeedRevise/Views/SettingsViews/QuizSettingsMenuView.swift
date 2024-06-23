@@ -9,8 +9,8 @@ import SwiftUI
 
 struct QuizSettingsMenuView: View {
     @Binding var tempQuiz: Bool
-    @State var disableTempQuiz: Bool = false
-    @StateObject var openAIViewModel: OpenAIViewModel
+    @State var disableTempQuiz: Bool
+    @EnvironmentObject private var openAIViewModel: OpenAIViewModel
     
     var body: some View {
         VStack {

@@ -8,9 +8,8 @@
 import SwiftUI
 
 struct SubjectsView: View {
-    private var subjectCount: Int = 0
-    @EnvironmentObject var subjectViewModel: SubjectViewModel
-    @Environment(\.colorScheme) var colorScheme
+    @EnvironmentObject private var subjectViewModel: SubjectViewModel
+    @Environment(\.colorScheme) private var colorScheme
     
     var body: some View {
         NavigationStack {

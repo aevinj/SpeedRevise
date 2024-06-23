@@ -11,8 +11,9 @@ struct TopicSettingsMenuView: View {
     @EnvironmentObject private var subjectViewModel: SubjectViewModel
     @Environment(\.dismiss) private var dismiss
     @State private var showLoading: Bool = false
+    @Binding var topicDeleted: Bool
     var currTopic: Topic
-    var currSubjectID: String
+    let currSubjectID: String
     
     var body: some View {
         HStack {
@@ -39,6 +40,7 @@ struct TopicSettingsMenuView: View {
                 showLoading = true
                 await subjectViewModel.deleteTopic(subjectID: currSubjectID, topicID: currTopic.id)
                 showLoading = false
+                topicDeleted = true
                 dismiss()
             }
         }

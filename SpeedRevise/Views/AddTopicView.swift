@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct AddTopicView: View {
-    @Environment(\.dismiss) var dismiss
-    @Environment(\.colorScheme) var colorScheme
+    @Environment(\.dismiss) private var dismiss
+    @Environment(\.colorScheme) private var colorScheme
     @EnvironmentObject private var subjectViewModel: SubjectViewModel
-    @State var currSubjectID: String
     @State private var topicName: String = ""
+    let currSubjectID: String
     
     var body: some View {
         ZStack {

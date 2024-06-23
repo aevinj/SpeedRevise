@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SubjectsExistingView: View {
-    @EnvironmentObject var subjectViewModel: SubjectViewModel
+    @EnvironmentObject private var subjectViewModel: SubjectViewModel
     
     var body: some View {
         VStack {

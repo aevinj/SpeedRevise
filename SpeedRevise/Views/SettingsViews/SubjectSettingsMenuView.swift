@@ -11,6 +11,7 @@ struct SubjectSettingsMenuView: View {
     @EnvironmentObject private var subjectViewModel: SubjectViewModel
     @Environment(\.dismiss) private var dismiss
     @State private var showLoading: Bool = false
+    @Binding var subjectDeleted: Bool
     var currSubject: Subject
     
     var body: some View {
@@ -38,6 +39,7 @@ struct SubjectSettingsMenuView: View {
                 showLoading = true
                 await subjectViewModel.deleteSubject(subjectID: currSubject.id)
                 showLoading = false
+                subjectDeleted = true
                 dismiss()
             }
         }

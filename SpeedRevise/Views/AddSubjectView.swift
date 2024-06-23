@@ -8,9 +8,9 @@
 import SwiftUI
 
 struct AddSubjectView: View {
-    @Environment(\.dismiss) var dismiss
-    @Environment(\.colorScheme) var colorScheme
-    @EnvironmentObject var subjectViewModel: SubjectViewModel
+    @Environment(\.dismiss) private var dismiss
+    @Environment(\.colorScheme) private var colorScheme
+    @EnvironmentObject private var subjectViewModel: SubjectViewModel
     @State private var subjectName: String = ""
 
     var body: some View {

@@ -16,12 +16,19 @@ class OpenAIViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     private var endpoint = "https://api.openai.com/v1/chat/completions"
     
+    func reset() {
+        messages = []
+        filteredMessages = []
+        userResponse = ""
+        isLoading = false
+    }
+    
     func isNotIntialised() -> Bool {
         return messages.isEmpty
     }
     
-    func initialiseQuiz(difficulty: Difficulty) {
-        let instruction = "Your aim is to test the user's knowledge on the topic of \(userResponse). Don't provide confirmation replies to user input - simply ask questions and perform concise analysis on the user's answers. Generate questions of \(difficulty.rawValue) difficulty. If the user asks for the answer, tell them the answer concisely."
+    func initialiseQuiz(difficulty: Difficulty, desiredTopic: String) {
+        let instruction = "Your aim is to test the user's knowledge on the topic of \(desiredTopic). Don't provide confirmation replies to user input - simply ask questions and perform concise analysis on the user's answers. Generate questions of \(difficulty.rawValue) difficulty. If the user asks for the answer, tell them the answer concisely."
         
         messages.append(OpenAIMessage(role: .system, content: instruction))
     }

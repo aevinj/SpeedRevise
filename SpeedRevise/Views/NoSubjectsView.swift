@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct NoSubjectsView: View {
-    @Environment(\.colorScheme) var colorScheme
+    @Environment(\.colorScheme) private var colorScheme
     
     var body: some View {
         VStack {

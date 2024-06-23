@@ -9,7 +9,7 @@ import SwiftUI
 
 struct NewQuizView: View {
     @Environment(\.dismiss) private var dismiss
-    @StateObject private var openAIViewModel: OpenAIViewModel = OpenAIViewModel()
+    @StateObject var openAIViewModel: OpenAIViewModel
     @State private var tempQuiz: Bool = true
     @State private var quizName: String = "New topic"
     @State private var showSettings: Bool = false
@@ -129,7 +129,7 @@ struct NewQuizView: View {
                         Button {
                             if openAIViewModel.isNotIntialised() {
                                 quizName = openAIViewModel.userResponse.lowercased().capitalizedFirst
-                                openAIViewModel.initialiseQuiz(difficulty: difficulty)
+//                                openAIViewModel.initialiseQuiz(difficulty: difficulty)
 
                                 openAIViewModel.generateQuestion {
                                     openAIViewModel.filteredMessages.append(FilteredMessage(from: openAIViewModel.messages.last!, isQuestion: true))

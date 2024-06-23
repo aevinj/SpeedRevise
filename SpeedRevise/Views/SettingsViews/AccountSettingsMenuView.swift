@@ -9,8 +9,8 @@ import SwiftUI
 
 struct AccountSettingsMenuView: View {
     @EnvironmentObject private var authViewModel: AuthViewModel
+    @Environment(\.dismiss) private var dismiss
     @State private var showLoading: Bool = false
-    @Binding var showSettings: Bool
     
     var body: some View {
         HStack {
@@ -38,11 +38,11 @@ struct AccountSettingsMenuView: View {
                 let deleteSuccessful = await authViewModel.deleteAccount()
                 if deleteSuccessful {
                     showLoading = false
-                    showSettings = false
                     
                     authViewModel.currentUser = nil
                     authViewModel.userSession = nil
                 }
+                dismiss()
             }
         }
         .presentationCompactAdaptation(.popover)

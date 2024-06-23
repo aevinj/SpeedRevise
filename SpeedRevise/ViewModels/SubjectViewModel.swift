@@ -13,6 +13,7 @@ import Firebase
 class SubjectViewModel : ObservableObject {
     @Published var subjects: [Subject] = []
     @Published var topics: [Topic] = []
+    @Published var quizzes: [Quiz] = []
     
     private let db = Firestore.firestore()
     private var userID = Auth.auth().currentUser?.uid ?? nil
@@ -82,6 +83,28 @@ class SubjectViewModel : ObservableObject {
             self.topics.removeAll {$0.id == topicID}
         } catch {
             print("Error deleting topic: \(error.localizedDescription)")
+        }
+    }
+    
+    func addQuiz(newQuiz: Quiz, subjectID: String, topicID: String) async {
+        do {
+            let encodedQuiz = try Firestore.Encoder().encode(newQuiz)
+            try await db.collection("users").document(userID!).collection("subjects").document(subjectID).collection("topics").document(topicID).collection("quizzes").document(newQuiz.id).setData(encodedQuiz)
+            self.quizzes.append(newQuiz)
+        } catch {
+            print("Error adding quiz: \(error.localizedDescription)")
+        }
+    }
+    
+    func fetchQuizzes(subjectID: String, topicID: String) {
+        db.collection("users").document(userID!).collection("subjects").document(subjectID).collection("topics").document(topicID).collection("quizzes").getDocuments { snapshot, error in
+            if let error = error {
+                print("Error fetching quizzes: \(error.localizedDescription)")
+                return
+            }
+            
+            guard let documents = snapshot?.documents else { return }
+            self.quizzes = documents.compactMap { try? $0.data(as: Quiz.self) }
         }
     }
 }

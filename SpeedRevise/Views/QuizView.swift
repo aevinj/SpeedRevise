@@ -7,21 +7,46 @@
 
 import SwiftUI
 
-struct TempTopicView: View {
-    @Environment(\.dismiss) var dismiss
-    @StateObject var openAIViewModel: OpenAIViewModel
-    @State var quizName: String
-    @State private var tempQuiz: Bool = true
+struct QuizView: View {
+    @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject private var subjectViewModel: SubjectViewModel
     @State private var showSettings: Bool = false
     @State private var rotationAngle: Double = 0
     @State private var difficulty: Difficulty = .medium
     @State private var quizFinished: Bool = false
     @State private var questionCountLimit: Int = 3
     
+    @EnvironmentObject private var openAIViewModel: OpenAIViewModel
+    @State var quizName: String
+    @State var tempQuiz: Bool = false
+    @State var disableTempChoice: Bool
+    @State var currSubject: String? = nil
+    @State var currTopic: String? = nil
+    var useOnAppear: Bool = false
+    
     var body: some View {
         ZStack {
             Color("BackgroundColor")
                 .ignoresSafeArea()
+                .onAppear {
+                    if useOnAppear {
+                        if openAIViewModel.isNotIntialised() {
+                            openAIViewModel.initialiseQuiz(difficulty: .medium, desiredTopic: currTopic!)
+                        }
+                        
+                        let role = openAIViewModel.messages.last!.role
+                        
+                        if role == .system || role == .user {
+                            openAIViewModel.generateQuestion {
+                                openAIViewModel.filteredMessages.append(FilteredMessage(from: openAIViewModel.messages.last!, isQuestion: true))
+                                openAIViewModel.userResponse = ""
+                            }
+                        }
+                    }
+                }
+                .onDisappear {
+                    openAIViewModel.reset()
+                }
             
             VStack {
                 HStack {
@@ -54,12 +79,12 @@ struct TempTopicView: View {
                             .clipShape(RoundedRectangle(cornerRadius: 10))
                     }
                     .popover(isPresented: $showSettings, content: {
-                        QuizSettingsMenuView(tempQuiz: .constant(true), disableTempQuiz: true, openAIViewModel: openAIViewModel)
+                        QuizSettingsMenuView(tempQuiz: $tempQuiz, disableTempQuiz: disableTempChoice)
                     })
                     
                     Spacer()
                     
-                    Text(quizName)
+                    Text(quizName.capitalizedFirst)
                         .font(.system(size: 32, weight: .medium))
                         .padding(.trailing, 16)
                 }
@@ -82,17 +107,27 @@ struct TempTopicView: View {
                 .padding(.bottom, 5)
                 
                 if quizFinished {
-                        Button {
+                    Button {
+                        if !tempQuiz {
+                            // TODO: replace fixed difficulty
+                            let newQuiz = Quiz(name: quizName, filteredContent: openAIViewModel.filteredMessages, unfilteredContent: openAIViewModel.messages, difficulty: .medium)
+                            
+                            Task {
+                                await subjectViewModel.addQuiz(newQuiz: newQuiz, subjectID: currSubject!, topicID: currTopic!)
+                                dismiss()
+                            }
+                        } else {
                             dismiss()
-                        } label: {
-                            Text("Discard")
-                                .foregroundStyle(Color("BGCFlipped"))
-                                .font(.system(size: 20, weight: .medium))
-                                .frame(width: UIScreen.main.bounds.width - 70, height: 50)
-                                .background(.ultraThinMaterial)
-                                .clipShape(RoundedRectangle(cornerRadius: 10))
-                                .padding(.bottom, 100)
                         }
+                    } label: {
+                        Text(tempQuiz ? "Discard" : "Return")
+                            .foregroundStyle(Color("BGCFlipped"))
+                            .font(.system(size: 20, weight: .medium))
+                            .frame(width: UIScreen.main.bounds.width - 70, height: 50)
+                            .background(.ultraThinMaterial)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                            .padding(.bottom, 100)
+                    }
                 } else {
                     Button {
                         openAIViewModel.filteredMessages.append(FilteredMessage(role: .user, content: "I'm not sure."))

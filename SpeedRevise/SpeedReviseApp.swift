@@ -20,12 +20,14 @@ class AppDelegate: NSObject, UIApplicationDelegate {
 @main
 struct SpeedReviseApp: App {
     @StateObject var authViewModel = AuthViewModel()
+    @StateObject var openAIViewModel = OpenAIViewModel()
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
     
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environmentObject(authViewModel)
+                .environmentObject(openAIViewModel)
         }
     }
 }
