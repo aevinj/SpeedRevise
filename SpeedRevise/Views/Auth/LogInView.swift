@@ -10,12 +10,11 @@ import SwiftUI
 struct LogInView: View {
     @State private var email: String = ""
     @State private var password: String = ""
-    @EnvironmentObject var authViewModel: AuthViewModel
+    @EnvironmentObject private var authViewModel: AuthViewModel
     
     var body: some View {
         NavigationStack {
             ZStack{
-                
                 ContainerRelativeShape()
                     .fill(Color(.systemGray5))
                     .ignoresSafeArea()

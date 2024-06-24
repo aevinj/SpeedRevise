@@ -17,17 +17,23 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     
 }
 
+/// authViewModel - used for controlling user authentication & logging in/out
+/// openAIViewModel - used for controlling GPT message generations
+/// subjectViewModel  - used for accessing saved data subjects on backend
 @main
 struct SpeedReviseApp: App {
-    @StateObject var authViewModel = AuthViewModel()
-    @StateObject var openAIViewModel = OpenAIViewModel()
     @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @StateObject var authViewModel: AuthViewModel = AuthViewModel()
+    @StateObject var openAIViewModel: OpenAIViewModel = OpenAIViewModel()
+    @StateObject var subjectViewModel: SubjectViewModel = SubjectViewModel()
+    
     
     var body: some Scene {
         WindowGroup {
             ContentView()
                 .environmentObject(authViewModel)
                 .environmentObject(openAIViewModel)
+                .environmentObject(subjectViewModel)
         }
     }
 }

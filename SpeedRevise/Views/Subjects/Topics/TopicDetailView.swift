@@ -11,12 +11,12 @@ struct TopicDetailView: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.colorScheme) private var colorScheme
     @EnvironmentObject private var subjectViewModel: SubjectViewModel
+    @EnvironmentObject private var openAIViewModel: OpenAIViewModel
     @State private var rotationAngle: Double = 0
     @State private var showSettings: Bool = false
-    @EnvironmentObject private var openAIViewModel: OpenAIViewModel
     @State private var topicDeleted = false
     var currTopic: Topic
-    var currSubjectID: String
+    let currSubjectID: String
     
     private var dateFormatter: DateFormatter {
         let formatter = DateFormatter()
@@ -152,8 +152,10 @@ struct TopicDetailView: View {
                                 
                                 Spacer()
                                 
-                                Image(systemName: "chevron.right")
-                                    .foregroundColor(Color(.black))
+                                if colorScheme == .dark {
+                                    Image(systemName: "chevron.right")
+                                        .foregroundColor(Color(.black))
+                                }
                             }
                         }
                         .listRowBackground(Color(hex: "E6E6E6"))

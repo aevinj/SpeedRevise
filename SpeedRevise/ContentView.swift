@@ -9,26 +9,23 @@ import SwiftUI
 
 struct ContentView: View {
     @EnvironmentObject var authViewModel: AuthViewModel
-    @State var subjectViewModel: SubjectViewModel = SubjectViewModel()
+    @EnvironmentObject var subjectViewModel: SubjectViewModel
     
     var body: some View {
-        Group {
-            if authViewModel.userSession != nil {
-                LoggedInView()
-                    .environmentObject(subjectViewModel)
-                    .onAppear {
-                        subjectViewModel.updateUserID()
-                        subjectViewModel.fetchSubjects()
-                        subjectViewModel.topics = []
-                        subjectViewModel.quizzes = []
-                    }
-            } else {
-                LogInView()
-                    .onAppear {
-                        authViewModel.userSession = nil
-                        authViewModel.currentUser = nil
-                    }
-            }
+        if authViewModel.userSession != nil {
+            LoggedInView()
+                .onAppear {
+                    subjectViewModel.updateUserID()
+                    subjectViewModel.fetchSubjects()
+                    subjectViewModel.topics = []
+                    subjectViewModel.quizzes = []
+                }
+        } else {
+            LogInView()
+                .onAppear {
+                    authViewModel.userSession = nil
+                    authViewModel.currentUser = nil
+                }
         }
     }
 }
