@@ -28,10 +28,15 @@ class OpenAIViewModel: ObservableObject {
     }
     
     func initialiseQuiz(difficulty: Difficulty, desiredTopic: String) {
-        let instruction = "Your aim is to test the user's knowledge on the topic of \(desiredTopic). Don't provide confirmation replies to user input - simply ask questions and perform concise analysis on the user's answers. Generate questions of \(difficulty.rawValue) difficulty. If the user asks for the answer, tell them the answer concisely."
-        
+        let instruction = """
+        Your aim is to test the user's knowledge on the topic of \(desiredTopic).
+        Don't provide confirmation replies to user input - simply ask questions and perform concise analysis on the user's answers.
+        Only output the question text directly. Generate questions of \(difficulty.rawValue) difficulty.
+        If the user asks for the answer, tell them the answer concisely.
+        """
         messages.append(OpenAIMessage(role: .system, content: instruction))
     }
+
     
     func performAnalysisOnUserResponse(completion: @escaping () -> Void) {
         Task {
