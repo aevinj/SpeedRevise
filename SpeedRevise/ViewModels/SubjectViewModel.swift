@@ -107,6 +107,15 @@ class SubjectViewModel : ObservableObject {
             self.quizzes = documents.compactMap { try? $0.data(as: Quiz.self) }
         }
     }
+    
+    func deleteQuiz(subjectID: String, topicID: String, quizID: String) async {
+        do {
+            try await db.collection("users").document(userID!).collection("subjects").document(subjectID).collection("topics").document(topicID).collection("quizzes").document(quizID).delete()
+            self.quizzes.removeAll {$0.id == quizID}
+        } catch {
+            print("Error deleting quiz: \(error.localizedDescription)")
+        }
+    }
 }
 
 

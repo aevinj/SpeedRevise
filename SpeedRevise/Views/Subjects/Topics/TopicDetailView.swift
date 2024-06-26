@@ -137,7 +137,7 @@ struct TopicDetailView: View {
                     }
                     
                     List(subjectViewModel.quizzes) { quiz in
-                        NavigationLink(destination: QuizDetailView(currQuiz: quiz)
+                        NavigationLink(destination: QuizDetailView(currQuiz: quiz, currTopicID: currTopic.id, currSubjectID: currSubjectID)
                             .navigationBarBackButtonHidden(true)) {
                             HStack {
                                 VStack (alignment: .leading) {
