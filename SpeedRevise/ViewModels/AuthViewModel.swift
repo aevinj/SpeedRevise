@@ -85,4 +85,21 @@ class AuthViewModel : ObservableObject {
         guard let snapshot = try? await Firestore.firestore().collection("users").document(uid).getDocument() else {return}
         self.currentUser = try? snapshot.data(as: User.self)
     }
+    
+    func updateUserDetails(firstName: String, lastName: String) async {
+        guard let user = userSession else { return }
+        
+        let data: [String: Any] = [
+            "firstName": firstName,
+            "lastName": lastName
+        ]
+        
+        do {
+            let userRef = Firestore.firestore().collection("users").document(user.uid)
+            try await userRef.updateData(data)
+            await fetchUser()
+        } catch {
+            print("Failed to update user details with error: \(error.localizedDescription)")
+        }
+    }
 }

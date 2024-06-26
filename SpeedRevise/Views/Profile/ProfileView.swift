@@ -12,8 +12,8 @@ struct ProfileView: View {
     @Environment(\.colorScheme) private var colorScheme
     @State private var rotationAngle: Double = 0
     @State private var showSettings: Bool = false
-    @State private var firstName: String = ""
-    @State private var lastName: String = ""
+    @State var firstName: String
+    @State var lastName: String
     
     var body: some View {
         ZStack {
@@ -60,21 +60,22 @@ struct ProfileView: View {
                         .font(.system(size: 20, weight: .medium))
                         .foregroundStyle(Color.primary)
                         .padding()
-                        .onAppear(perform: {
-                            firstName = authViewModel.currentUser?.firstName ?? "None"
-                            lastName = authViewModel.currentUser?.lastName ?? "None"
-                        })
+                        .onDisappear {
+                            Task {
+                                await authViewModel.updateUserDetails(firstName: firstName, lastName: lastName)
+                            }
+                        }
                     
                     TextField("", text: $firstName, prompt: Text("")
                         .foregroundStyle(Color(.systemGray)))
-                        .autocorrectionDisabled()
-                        .textInputAutocapitalization(.never)
-                        .fontWeight(.medium)
-                        .padding()
-                        .frame(width: UIScreen.main.bounds.width-200, height: 60)
-                        .background(.thickMaterial)
-                        .cornerRadius(10)
-
+                    .autocorrectionDisabled()
+                    .textInputAutocapitalization(.never)
+                    .fontWeight(.medium)
+                    .padding()
+                    .frame(width: UIScreen.main.bounds.width-200, height: 60)
+                    .background(.thickMaterial)
+                    .cornerRadius(10)
+                    
                 }
                 
                 HStack {
@@ -85,14 +86,14 @@ struct ProfileView: View {
                     
                     TextField("", text: $lastName, prompt: Text("")
                         .foregroundStyle(Color(.systemGray)))
-                        .autocorrectionDisabled()
-                        .textInputAutocapitalization(.never)
-                        .fontWeight(.medium)
-                        .padding()
-                        .frame(width: UIScreen.main.bounds.width-200, height: 60)
-                        .background(.thickMaterial)
-                        .cornerRadius(10)
-
+                    .autocorrectionDisabled()
+                    .textInputAutocapitalization(.never)
+                    .fontWeight(.medium)
+                    .padding()
+                    .frame(width: UIScreen.main.bounds.width-200, height: 60)
+                    .background(.thickMaterial)
+                    .cornerRadius(10)
+                    
                 }
                 
                 Spacer()
@@ -114,5 +115,5 @@ struct ProfileView: View {
 }
 
 #Preview {
-    ProfileView()
+    ProfileView(firstName: "Aevin", lastName: "Jais")
 }

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct LoggedInView: View {
     @State private var selectedTab: Tab = .house
+    @EnvironmentObject private var authViewModel: AuthViewModel
     
     init() {
         UITabBar.appearance().isHidden = true
@@ -24,7 +25,7 @@ struct LoggedInView: View {
                     SubjectsView()
                         .tag(Tab.folder)
                     
-                    ProfileView()
+                    ProfileView(firstName: authViewModel.currentUser?.firstName ?? "None", lastName: authViewModel.currentUser?.lastName ?? "None")
                         .tag(Tab.person)
                 }
             }
