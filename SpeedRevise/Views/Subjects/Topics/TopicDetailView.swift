@@ -31,12 +31,6 @@ struct TopicDetailView: View {
             Color("BackgroundColor")
                 .ignoresSafeArea()
             
-            /*
-             Image("leaves")
-             .renderingMode(.template)
-             .foregroundStyle(colorScheme == .dark ? Color(hex: "34373B") : Color(hex: "E6E6E6"))
-             */
-            
             /// TItle, back button and settings button
             VStack {
                 HStack {
@@ -80,7 +74,7 @@ struct TopicDetailView: View {
                     Spacer()
                     
                     Text(currTopic.name.capitalizedFirst)
-                        .font(.system(size: 32, weight: .medium))
+                        .font(.system(size: 40, weight: .medium))
                         .padding(.trailing, 16)
                 }
                 .padding(.top, 32)
@@ -102,43 +96,63 @@ struct TopicDetailView: View {
                             .font(.system(size: 45))
                             .padding(.trailing, 20)
                     }
-
                 }
                 
-                List(subjectViewModel.quizzes) { quiz in
-                    Button {
-                        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-                           let window = windowScene.windows.first {
-                            window.rootViewController?.present(UIHostingController(rootView: QuizDetailView(currQuiz: quiz, currTopicID: currTopic.id, currSubjectID: currSubjectID).navigationBarBackButtonHidden(true)), animated: true, completion: nil)
-                        }
-                    } label: {
-                        HStack {
-                            VStack (alignment: .leading) {
-                                Text(quiz.name.capitalizedFirst)
-                                    .font(.system(size: 20))
-                                    .foregroundStyle(Color("BGCFlipped"))
-                                
-                                Text("Created: \(dateFormatter.string(from: quiz.creationDate))")
-                                    .font(.system(size: 14))
-                                    .foregroundStyle(Color(.systemGray))
+                if subjectViewModel.quizzes.count > 0 {
+                    List {
+                        ForEach(subjectViewModel.quizzes) { quiz in
+                            Button {
+                                if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                                   let window = windowScene.windows.first {
+                                    window.rootViewController?.present(UIHostingController(rootView: QuizDetailView(currQuiz: quiz, currTopicID: currTopic.id, currSubjectID: currSubjectID).navigationBarBackButtonHidden(true)), animated: true, completion: nil)
+                                }
+                            } label: {
+                                HStack {
+                                    VStack(alignment: .leading) {
+                                        Text(quiz.name.capitalizedFirst)
+                                            .font(.system(size: 20))
+                                            .foregroundStyle(Color("BGCFlipped"))
+                                        
+                                        Text("Created: \(dateFormatter.string(from: quiz.creationDate))")
+                                            .font(.system(size: 14))
+                                            .foregroundStyle(Color(.systemGray))
+                                    }
+                                    
+                                    Spacer()
+                                    
+                                    Image(systemName: "note.text")
+                                        .font(.system(size: 30, weight: .medium))
+                                        .foregroundStyle(Color("BGCFlipped"))
+                                        .frame(width: 75, height: 75)
+                                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                                }
                             }
-                            
-                            Spacer()
-                            
-                            Image(systemName: "note.text")
-                                .font(.system(size: 30, weight: .medium))
-                                .foregroundStyle(Color("BGCFlipped"))
-                                .frame(width: 75, height: 75)
-                                .clipShape(RoundedRectangle(cornerRadius: 10))
+                            .listRowBackground(
+                                Rectangle()
+                                    .background(.ultraThinMaterial)
+                                    .opacity(0.1)
+                            )
+                        }
+                        .onDelete { indexSet in
+                            for index in indexSet {
+                                let currQuiz = subjectViewModel.quizzes[index]
+                                
+                                Task {
+                                    await subjectViewModel.deleteQuiz(subjectID: currSubjectID, topicID: currTopic.id, quizID: currQuiz.id)
+                                }
+                                
+                            }
                         }
                     }
-                    .listRowBackground(
-                        Rectangle()
-                            .background(.ultraThinMaterial)
-                            .opacity(0.1)
-                    )
+                    .scrollContentBackground(.hidden)
+                } else {
+                    ContentUnavailableView {
+                        Label("No Quizzes", systemImage: "questionmark.folder")
+                    } description: {
+                        Text("When you generate new quizzes, they will appear here.")
+                    }
+                    .padding(.bottom, 100)
                 }
-                .scrollContentBackground(.hidden)
                 
                 Spacer()
             }

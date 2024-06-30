@@ -10,7 +10,6 @@ import SwiftUI
 struct SubjectDetailView: View {
     @EnvironmentObject private var subjectViewModel: SubjectViewModel
     @Environment(\.dismiss) private var dismiss
-    @Environment(\.colorScheme) private var colorScheme
     @State private var rotationAngle: Double = 0
     @State private var showSettings: Bool = false
     @State private var subjectDeleted: Bool = false
@@ -20,10 +19,6 @@ struct SubjectDetailView: View {
         ZStack {
             Color("BackgroundColor")
                 .ignoresSafeArea()
-            
-            Image("leaves")
-                .renderingMode(.template)
-                .foregroundStyle(colorScheme == .dark ? Color(hex: "34373B") : Color(hex: "E6E6E6"))
             
             VStack {
                 HStack {
@@ -68,10 +63,12 @@ struct SubjectDetailView: View {
                     Spacer()
                     
                     Text(currSubject.name.capitalizedFirst)
-                        .font(.system(size: 32, weight: .medium))
+                        .font(.system(size: 40, weight: .medium))
                         .padding(.trailing, 20)
                 }
                 .padding(EdgeInsets(top: 32, leading: 20, bottom: 0, trailing: 0))
+                
+                //TODO: Add a my subjects label
                 
                 if subjectViewModel.topics.isEmpty {
                     NoTopicsView(currSubjectID: currSubject.id)
