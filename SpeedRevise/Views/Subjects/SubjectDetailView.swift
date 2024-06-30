@@ -27,11 +27,6 @@ struct SubjectDetailView: View {
             
             VStack {
                 HStack {
-                    Text(currSubject.name.capitalizedFirst)
-                        .font(.system(size: 32, weight: .medium))
-                    
-                    Spacer()
-                    
                     Button {
                         dismiss()
                     } label: {
@@ -60,7 +55,6 @@ struct SubjectDetailView: View {
                             .frame(width: 55, height: 55)
                             .background(.ultraThinMaterial)
                             .clipShape(RoundedRectangle(cornerRadius: 10))
-                            .padding(.trailing, 35)
                     }
                     .popover(isPresented: $showSettings, content: {
                         SubjectSettingsMenuView(subjectDeleted: $subjectDeleted, currSubject: currSubject)
@@ -70,8 +64,14 @@ struct SubjectDetailView: View {
                                 }
                             }
                     })
+                    
+                    Spacer()
+                    
+                    Text(currSubject.name.capitalizedFirst)
+                        .font(.system(size: 32, weight: .medium))
+                        .padding(.trailing, 20)
                 }
-                .padding(EdgeInsets(top: 32, leading: 32, bottom: 0, trailing: 0))
+                .padding(EdgeInsets(top: 32, leading: 20, bottom: 0, trailing: 0))
                 
                 if subjectViewModel.topics.isEmpty {
                     NoTopicsView(currSubjectID: currSubject.id)
@@ -82,9 +82,3 @@ struct SubjectDetailView: View {
         }
     }
 }
-
-
-
-
-
-

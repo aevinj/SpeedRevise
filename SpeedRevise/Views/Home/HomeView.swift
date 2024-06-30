@@ -57,7 +57,7 @@ struct HomeView: View {
                                 .shadow(radius: 70)
                                 .frame(width: 64, height: 64)
                                 .background(.ultraThinMaterial)
-                                .clipShape(RoundedRectangle(cornerRadius: 25))
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
                                 .padding(.trailing, 32)
                         })
                     }
@@ -71,7 +71,7 @@ struct HomeView: View {
                         Spacer()
                         
                         RoundedRectangle(cornerRadius: 50.0)
-                            .fill(Color("BGCFlipped"))
+                            .fill(.ultraThinMaterial)
                             .frame(width: UIScreen.main.bounds.width, height: 575)
                     }
                     .ignoresSafeArea()
@@ -80,7 +80,7 @@ struct HomeView: View {
                         HStack {
                             Text("Overview")
                                 .font(.system(size: 30, weight: .regular))
-                                .foregroundStyle(Color("BackgroundColor"))
+                                .foregroundStyle(Color("BGCFlipped"))
                                 .padding(EdgeInsets(top: 0, leading: 45, bottom: 10, trailing: 0))
                             
                             Spacer()
@@ -101,7 +101,7 @@ struct HomeView: View {
                                     .foregroundStyle(Color("BackgroundColor"))
                             }
                             .frame(width: UIScreen.main.bounds.width-120, height: 60)
-                            .background(Color(hex: "E6E6E6"))
+                            .background(colorScheme == .dark ? Color(hex: "34373B") : Color(hex: "E6E6E6"))
                             .cornerRadius(10)
                             
                             NavigationLink {
@@ -122,7 +122,7 @@ struct HomeView: View {
                                     .foregroundStyle(Color(.systemGray))
                                     .shadow(radius: 50)
                                     .frame(width: 60, height: 60)
-                                    .background(Color(hex: "E6E6E6"))
+                                    .background(colorScheme == .dark ? Color(hex: "34373B") : Color(hex: "E6E6E6"))
                                     .clipShape(RoundedRectangle(cornerRadius: 10))
                             }
                         }

@@ -50,7 +50,7 @@ struct TopicDetailView: View {
                             .frame(width: 55, height: 55)
                             .background(.ultraThinMaterial)
                             .clipShape(RoundedRectangle(cornerRadius: 10))
-                            .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 2))
+                            .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 2))
                     }
                     
                     Button {
