@@ -15,6 +15,7 @@ struct TopicDetailView: View {
     @State private var rotationAngle: Double = 0
     @State private var showSettings: Bool = false
     @State private var topicDeleted = false
+    
     var currTopic: Topic
     let currSubjectID: String
     
@@ -30,33 +31,26 @@ struct TopicDetailView: View {
             Color("BackgroundColor")
                 .ignoresSafeArea()
             
-            VStack {
-                Image("leaves")
-                    .renderingMode(.template)
-                    .foregroundStyle(colorScheme == .dark ? Color(hex: "34373B") : Color(hex: "E6E6E6"))
-                
-                Spacer()
-            }
+            /*
+             Image("leaves")
+             .renderingMode(.template)
+             .foregroundStyle(colorScheme == .dark ? Color(hex: "34373B") : Color(hex: "E6E6E6"))
+             */
             
+            /// TItle, back button and settings button
             VStack {
                 HStack {
-                    Text(currTopic.name.capitalizedFirst)
-                        .font(.system(size: 32, weight: .medium))
-                    
-                    Spacer()
-                    
                     Button {
                         dismiss()
                     } label: {
                         Image(systemName: "chevron.left")
-                            .foregroundStyle(Color("BGCFlipped"))
                             .font(.system(size: 20, weight: .medium))
                             .foregroundStyle(Color.primary)
                             .shadow(radius: 50)
                             .frame(width: 55, height: 55)
                             .background(.ultraThinMaterial)
                             .clipShape(RoundedRectangle(cornerRadius: 10))
-                            .padding(.trailing, 2)
+                            .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 2))
                     }
                     
                     Button {
@@ -73,7 +67,6 @@ struct TopicDetailView: View {
                             .frame(width: 55, height: 55)
                             .background(.ultraThinMaterial)
                             .clipShape(RoundedRectangle(cornerRadius: 10))
-                            .padding(.trailing, 35)
                     }
                     .popover(isPresented: $showSettings, content: {
                         TopicSettingsMenuView(topicDeleted: $topicDeleted, currTopic: currTopic, currSubjectID: currSubjectID)
@@ -83,94 +76,72 @@ struct TopicDetailView: View {
                                 }
                             }
                     })
-                }
-                .padding(EdgeInsets(top: 32, leading: 32, bottom: 5, trailing: 0))
-                
-                HStack {
-                    NavigationLink {
-                        QuizView(quizName: currTopic.name.capitalizedFirst, disableTempChoice: false, currSubject: currSubjectID, currTopic: currTopic.id, useOnAppear: true)
-                            .navigationBarBackButtonHidden(true)
-                    } label: {
-                        Text("New Quiz")
-                            .frame(width: 120, height: 120)
-                            .background(Color.primary)
-                            .foregroundStyle(Color.background)
-                            .clipShape(RoundedRectangle(cornerRadius: 10))
-                            .padding(.trailing, 10)
-                    }
-                    
-                    Button {
-                        
-                    } label: {
-                        Text("New Note")
-                            .frame(width: 120, height: 120)
-                            .background(Color.primary)
-                            .foregroundStyle(Color.background)
-                            .clipShape(RoundedRectangle(cornerRadius: 10))
-                    }
-                }
-                .padding()
-                
-                Spacer()
-            }
-            
-            VStack {
-                Spacer()
-                
-                RoundedRectangle(cornerRadius: 50.0)
-                    .fill(Color("BGCFlipped"))
-                    .frame(width: UIScreen.main.bounds.width, height: 550)
-            }
-            .ignoresSafeArea()
-            
-            VStack {
-                Spacer()
-                
-                VStack {
-                    HStack {
-                        Text("Saved Quizzes")
-                            .font(.system(size: 30, weight: .regular))
-                            .foregroundStyle(Color("BackgroundColor"))
-                            .padding(EdgeInsets(top: 32, leading: 45, bottom: 10, trailing: 0))
-                        
-                        Spacer()
-                    }
-                    
-                    List(subjectViewModel.quizzes) { quiz in
-                        NavigationLink(destination: QuizDetailView(currQuiz: quiz, currTopicID: currTopic.id, currSubjectID: currSubjectID)
-                            .navigationBarBackButtonHidden(true)) {
-                            HStack {
-                                VStack (alignment: .leading) {
-                                    Text(quiz.name.capitalizedFirst)
-                                        .font(.system(size: 20))
-                                        .foregroundStyle(Color(.black))
-                                    
-                                    Text("Created: \(dateFormatter.string(from: quiz.creationDate))")
-                                        .font(.system(size: 14))
-                                        .foregroundStyle(Color(.systemGray))
-                                }
-                                
-                                Spacer()
-                                
-                                if colorScheme == .dark {
-                                    Image(systemName: "chevron.right")
-                                        .foregroundColor(Color(.black))
-                                }
-                            }
-                        }
-                        .listRowBackground(Color(hex: "E6E6E6"))
-                    }
-                    .scrollContentBackground(.hidden)
-                    .listStyle(InsetGroupedListStyle())
-                    .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
-                    
-                    //TODO: saved notes
                     
                     Spacer()
+                    
+                    Text(currTopic.name.capitalizedFirst)
+                        .font(.system(size: 32, weight: .medium))
+                        .padding(.trailing, 16)
                 }
-                .frame(width: nil, height: 550)
+                .padding(.top, 32)
+                
+                HStack {
+                    Text("My Quizzes")
+                        .font(.system(size: 30, weight: .regular))
+                        .foregroundStyle(Color("BGCFlipped"))
+                        .padding(EdgeInsets(top: 24, leading: 24, bottom: 10, trailing: 0))
+                    
+                    Spacer()
+                    
+                    NavigationLink {
+                        QuizView(quizName: "Quiz " + String(subjectViewModel.quizzes.count + 1), disableTempChoice: false, currSubject: currSubjectID, currTopic: currTopic.id, useOnAppear: true)
+                            .navigationBarBackButtonHidden(true)
+                    } label: {
+                        Image(systemName: "plus.square.dashed")
+                            .foregroundStyle(.green)
+                            .font(.system(size: 45))
+                            .padding(.trailing, 20)
+                    }
+
+                }
+                
+                List(subjectViewModel.quizzes) { quiz in
+                    Button {
+                        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+                           let window = windowScene.windows.first {
+                            window.rootViewController?.present(UIHostingController(rootView: QuizDetailView(currQuiz: quiz, currTopicID: currTopic.id, currSubjectID: currSubjectID).navigationBarBackButtonHidden(true)), animated: true, completion: nil)
+                        }
+                    } label: {
+                        HStack {
+                            VStack (alignment: .leading) {
+                                Text(quiz.name.capitalizedFirst)
+                                    .font(.system(size: 20))
+                                    .foregroundStyle(Color("BGCFlipped"))
+                                
+                                Text("Created: \(dateFormatter.string(from: quiz.creationDate))")
+                                    .font(.system(size: 14))
+                                    .foregroundStyle(Color(.systemGray))
+                            }
+                            
+                            Spacer()
+                            
+                            Image(systemName: "note.text")
+                                .font(.system(size: 30, weight: .medium))
+                                .foregroundStyle(Color("BGCFlipped"))
+                                .frame(width: 75, height: 75)
+                                .clipShape(RoundedRectangle(cornerRadius: 10))
+                        }
+                    }
+                    .listRowBackground(
+                        Rectangle()
+                            .background(.ultraThinMaterial)
+                            .opacity(0.1)
+                    )
+                }
+                .scrollContentBackground(.hidden)
+                
+                Spacer()
             }
-            .ignoresSafeArea()
         }
     }
 }

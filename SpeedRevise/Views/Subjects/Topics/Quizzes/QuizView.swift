@@ -110,7 +110,7 @@ struct QuizView: View {
                     Button {
                         if !tempQuiz {
                             // TODO: replace fixed difficulty
-                            let newQuiz = Quiz(name: quizName, filteredContent: openAIViewModel.filteredMessages, unfilteredContent: openAIViewModel.messages, difficulty: .medium)
+                            let newQuiz = Quiz(name: "Quiz " + String(subjectViewModel.quizzes.count + 1), filteredContent: openAIViewModel.filteredMessages, unfilteredContent: openAIViewModel.messages, difficulty: .medium)
                             
                             Task {
                                 await subjectViewModel.addQuiz(newQuiz: newQuiz, subjectID: currSubject!, topicID: currTopic!)
