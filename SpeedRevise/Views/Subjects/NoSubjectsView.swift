@@ -51,6 +51,14 @@ struct NoSubjectsView: View {
                     Color(.black)
                         .ignoresSafeArea()
                         .opacity(0.5)
+                        .onTapGesture {
+                            withAnimation(.spring(response: 0.5)) {
+                                animationOffset = 1000
+                            }
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.25) {
+                                showAddSubject = false
+                            }
+                        }
                     
                     VStack {
                         Text("New Subject")
