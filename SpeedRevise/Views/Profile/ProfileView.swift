@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ProfileView: View {
     @EnvironmentObject private var authViewModel: AuthViewModel
-    @Environment(\.colorScheme) private var colorScheme
     @State private var rotationAngle: Double = 0
     @State private var showSettings: Bool = false
     @State var firstName: String
@@ -20,18 +19,8 @@ struct ProfileView: View {
             Color("BackgroundColor")
                 .ignoresSafeArea()
             
-            Image("leaves")
-                .renderingMode(.template)
-                .foregroundStyle(colorScheme == .dark ? Color(hex: "34373B") : Color(hex: "E6E6E6"))
-            
             VStack{
                 HStack {
-                    Text("My Account")
-                        .font(.system(size: 32, weight: .regular))
-                        .padding(EdgeInsets(top: 32, leading: 50, bottom: 0, trailing: 0))
-                    
-                    Spacer()
-                    
                     Button {
                         withAnimation(.easeInOut(duration: 0.3)) {
                             rotationAngle += 90
@@ -46,12 +35,18 @@ struct ProfileView: View {
                             .frame(width: 55, height: 55)
                             .background(.ultraThinMaterial)
                             .clipShape(RoundedRectangle(cornerRadius: 10))
-                            .padding(EdgeInsets(top: 32, leading: 0, bottom: 0, trailing: 50))
                     }
                     .popover(isPresented: $showSettings, content: {
                         AccountSettingsMenuView()
                     })
+                    
+                    Spacer()
+                    
+                    Text("My Account")
+                        .font(.system(size: 40, weight: .medium))
+                        .padding(.trailing, 20)
                 }
+                .padding(EdgeInsets(top: 32, leading: 20, bottom: 0, trailing: 0))
                 
                 Spacer()
                 
@@ -62,11 +57,16 @@ struct ProfileView: View {
                         .padding()
                         .onDisappear {
                             Task {
-                                await authViewModel.updateUserDetails(firstName: firstName, lastName: lastName)
+                                if firstName.count > 0 && lastName.count > 0 {
+                                    await authViewModel.updateUserDetails(firstName: firstName, lastName: lastName)
+                                } else {
+                                    firstName = authViewModel.currentUser?.firstName ?? "None"
+                                    lastName = authViewModel.currentUser?.lastName ?? "None"
+                                }
                             }
                         }
                     
-                    TextField("", text: $firstName, prompt: Text("")
+                    TextField("", text: $firstName, prompt: Text("Enter First Name")
                         .foregroundStyle(Color(.systemGray)))
                     .autocorrectionDisabled()
                     .textInputAutocapitalization(.never)
@@ -75,7 +75,19 @@ struct ProfileView: View {
                     .frame(width: UIScreen.main.bounds.width-200, height: 60)
                     .background(.thickMaterial)
                     .cornerRadius(10)
-                    
+                    .overlay {
+                        if firstName.count == 0 {
+                            HStack {
+                                Spacer()
+                                
+                                Image(systemName: "xmark.circle.fill")
+                                    .imageScale(.large)
+                                    .fontWeight(.bold)
+                                    .foregroundStyle(.red)
+                                    .padding(.trailing, 10)
+                            }
+                        }
+                    }
                 }
                 
                 HStack {
@@ -84,7 +96,7 @@ struct ProfileView: View {
                         .foregroundStyle(Color.primary)
                         .padding()
                     
-                    TextField("", text: $lastName, prompt: Text("")
+                    TextField("", text: $lastName, prompt: Text("Enter Last Name")
                         .foregroundStyle(Color(.systemGray)))
                     .autocorrectionDisabled()
                     .textInputAutocapitalization(.never)
@@ -93,7 +105,19 @@ struct ProfileView: View {
                     .frame(width: UIScreen.main.bounds.width-200, height: 60)
                     .background(.thickMaterial)
                     .cornerRadius(10)
-                    
+                    .overlay {
+                        if lastName.count == 0 {
+                            HStack {
+                                Spacer()
+                                
+                                Image(systemName: "xmark.circle.fill")
+                                    .imageScale(.large)
+                                    .fontWeight(.bold)
+                                    .foregroundStyle(.red)
+                                    .padding(.trailing, 10)
+                            }
+                        }
+                    }
                 }
                 
                 Spacer()

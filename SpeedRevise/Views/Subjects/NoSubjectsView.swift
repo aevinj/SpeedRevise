@@ -18,7 +18,7 @@ struct NoSubjectsView: View {
             VStack {
                 HStack {
                     Text("My Subjects")
-                        .font(.system(size: 32, weight: .regular))
+                        .font(.system(size: 40, weight: .medium))
                         .padding(EdgeInsets(top: 32, leading: 32, bottom: 0, trailing: 0))
                     
                     Spacer()

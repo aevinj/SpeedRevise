@@ -98,7 +98,6 @@ struct HomeView: View {
                                     .textInputAutocapitalization(.never)
                                     .fontWeight(.medium)
                                     .padding(.leading, 5)
-                                    .foregroundStyle(Color("BackgroundColor"))
                             }
                             .frame(width: UIScreen.main.bounds.width-120, height: 60)
                             .background(colorScheme == .dark ? Color(hex: "34373B") : Color(hex: "E6E6E6"))
