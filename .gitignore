@@ -1,2 +1,2 @@
-# Ignore the constants.swift file in the SpeedRevise folder
-SpeedRevise/Keys.swift
+# Ignore the APIKeys.swift file in the SpeedRevise folder
+SpeedRevise/APIKey.swift
