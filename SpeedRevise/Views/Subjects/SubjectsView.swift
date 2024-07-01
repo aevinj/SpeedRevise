@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SubjectsView: View {
     @EnvironmentObject private var subjectViewModel: SubjectViewModel
-    @Environment(\.colorScheme) private var colorScheme
+//    @Environment(\.colorScheme) private var colorScheme
     
     var body: some View {
         NavigationStack {
@@ -17,24 +17,14 @@ struct SubjectsView: View {
                 Color("BackgroundColor")
                     .ignoresSafeArea()
                 
-                Image("leaves")
-                    .renderingMode(.template)
-                    .foregroundStyle(colorScheme == .dark ? Color(hex: "34373B") : Color(hex: "E6E6E6"))
+//                Image("leaves")
+//                    .renderingMode(.template)
+//                    .foregroundStyle(colorScheme == .dark ? Color(hex: "34373B") : Color(hex: "E6E6E6"))
                 
-                VStack {
-                    HStack {
-                        Text("My Subjects")
-                            .font(.system(size: 32, weight: .regular))
-                            .padding(EdgeInsets(top: 32, leading: 32, bottom: 0, trailing: 0))
-                        
-                        Spacer()
-                    }	
-                    
-                    if subjectViewModel.subjects.isEmpty {
-                        NoSubjectsView()
-                    } else {
-                        SubjectsExistingView()
-                    }
+                if subjectViewModel.subjects.isEmpty {
+                    NoSubjectsView()
+                } else {
+                    SubjectsExistingView()
                 }
             }
         }

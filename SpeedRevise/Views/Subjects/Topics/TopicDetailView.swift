@@ -31,7 +31,7 @@ struct TopicDetailView: View {
             Color("BackgroundColor")
                 .ignoresSafeArea()
             
-            /// TItle, back button and settings button
+            // TItle, back button and settings button
             VStack {
                 HStack {
                     Button {

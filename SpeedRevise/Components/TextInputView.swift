@@ -23,7 +23,6 @@ struct TextInputView: View {
                 .frame(width: UIScreen.main.bounds.width-96, height: 60)
                 .background(.thickMaterial)
                 .cornerRadius(10)
-//                .shadow(radius: 50)
             
         } else {
             
@@ -35,7 +34,6 @@ struct TextInputView: View {
                 .frame(width: UIScreen.main.bounds.width-96, height: 60)
                 .background(.thickMaterial)
                 .cornerRadius(10)
-//                .shadow(radius: 50)
 
         }
     }

@@ -12,6 +12,14 @@ struct SubjectsExistingView: View {
     
     var body: some View {
         VStack {
+            HStack {
+                Text("My Subjects")
+                    .font(.system(size: 32, weight: .regular))
+                    .padding(EdgeInsets(top: 32, leading: 32, bottom: 0, trailing: 0))
+                
+                Spacer()
+            }
+            
             List(subjectViewModel.subjects) { subject in
                 NavigationLink(destination: SubjectDetailView(currSubject: subject).onAppear(perform: {
                     subjectViewModel.fetchTopics(subjectID: subject.id)
