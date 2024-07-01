@@ -46,12 +46,13 @@
 		40B5104F2C18B4650019A55D /* QuizSettingsMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40B5104E2C18B4650019A55D /* QuizSettingsMenuView.swift */; };
 		40C319F52C0914CE00215518 /* FirstView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40C319F42C0914CE00215518 /* FirstView.swift */; };
 		40CE7C552C0BC106005489AD /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40CE7C542C0BC106005489AD /* User.swift */; };
+		40D10EB62C3330E40061B207 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = 40D10EB52C3330E40061B207 /* .gitignore */; };
+		40D10EB82C33312C0061B207 /* APIKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D10EB72C33312C0061B207 /* APIKey.swift */; };
 		40D6955A2C32FB5400DDEEFA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 40D695592C32FB5400DDEEFA /* GoogleService-Info.plist */; };
 		40D7FA6F2C11FD6700326284 /* SubjectsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D7FA6E2C11FD6700326284 /* SubjectsView.swift */; };
 		40D923782C1B6467000D2659 /* QuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40D923772C1B6467000D2659 /* QuizView.swift */; };
 		40EC2F502C0A86AB00AFA2AF /* TextInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40EC2F4F2C0A86AA00AFA2AF /* TextInputView.swift */; };
 		40FF4B632C172F0300E6E8B5 /* OpenAIViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FF4B622C172F0300E6E8B5 /* OpenAIViewModel.swift */; };
-		40FF4B6E2C17457500E6E8B5 /* Keys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FF4B6D2C17457500E6E8B5 /* Keys.swift */; };
 		40FF4B702C1760E900E6E8B5 /* OpenAIModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40FF4B6F2C1760E900E6E8B5 /* OpenAIModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -111,12 +112,13 @@
 		40B5104E2C18B4650019A55D /* QuizSettingsMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizSettingsMenuView.swift; sourceTree = "<group>"; };
 		40C319F42C0914CE00215518 /* FirstView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstView.swift; sourceTree = "<group>"; };
 		40CE7C542C0BC106005489AD /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		40D10EB52C3330E40061B207 /* .gitignore */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		40D10EB72C33312C0061B207 /* APIKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIKey.swift; sourceTree = "<group>"; };
 		40D695592C32FB5400DDEEFA /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		40D7FA6E2C11FD6700326284 /* SubjectsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectsView.swift; sourceTree = "<group>"; };
 		40D923772C1B6467000D2659 /* QuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizView.swift; sourceTree = "<group>"; };
 		40EC2F4F2C0A86AA00AFA2AF /* TextInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextInputView.swift; sourceTree = "<group>"; };
 		40FF4B622C172F0300E6E8B5 /* OpenAIViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIViewModel.swift; sourceTree = "<group>"; };
-		40FF4B6D2C17457500E6E8B5 /* Keys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keys.swift; sourceTree = "<group>"; };
 		40FF4B6F2C1760E900E6E8B5 /* OpenAIModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenAIModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -267,6 +269,7 @@
 		40A5D3FB2C0658E500852CA6 = {
 			isa = PBXGroup;
 			children = (
+				40D10EB52C3330E40061B207 /* .gitignore */,
 				40A5D4062C0658E500852CA6 /* SpeedRevise */,
 				40A5D4172C0658E600852CA6 /* SpeedReviseTests */,
 				40A5D4212C0658E600852CA6 /* SpeedReviseUITests */,
@@ -288,7 +291,7 @@
 			isa = PBXGroup;
 			children = (
 				40D695592C32FB5400DDEEFA /* GoogleService-Info.plist */,
-				40FF4B6D2C17457500E6E8B5 /* Keys.swift */,
+				40D10EB72C33312C0061B207 /* APIKey.swift */,
 				40A5D4072C0658E500852CA6 /* SpeedReviseApp.swift */,
 				40A5D4092C0658E500852CA6 /* ContentView.swift */,
 				40A5D40B2C0658E600852CA6 /* Assets.xcassets */,
@@ -449,6 +452,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				40D10EB62C3330E40061B207 /* .gitignore in Resources */,
 				40A5D40F2C0658E600852CA6 /* Preview Assets.xcassets in Resources */,
 				40A5D40C2C0658E600852CA6 /* Assets.xcassets in Resources */,
 				40D6955A2C32FB5400DDEEFA /* GoogleService-Info.plist in Resources */,
@@ -505,8 +509,8 @@
 				402D618A2C28B4C400C1F577 /* NoTopicsView.swift in Sources */,
 				40CE7C552C0BC106005489AD /* User.swift in Sources */,
 				404A98F12C1493D900A35E28 /* SubjectViewModel.swift in Sources */,
-				40FF4B6E2C17457500E6E8B5 /* Keys.swift in Sources */,
 				40782CB42C0CAFFB004E923C /* ProfileView.swift in Sources */,
+				40D10EB82C33312C0061B207 /* APIKey.swift in Sources */,
 				402D61952C28B60400C1F577 /* LoggedInView.swift in Sources */,
 				409402A12C14DBA700207CAE /* SubjectsExistingView.swift in Sources */,
 				405C58492C203BCC004B27E0 /* TopicSettingsMenuView.swift in Sources */,
