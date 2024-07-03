@@ -12,17 +12,14 @@ struct ContentView: View {
     @EnvironmentObject private var subjectViewModel: SubjectViewModel
     
     var body: some View {
-        /*
         if authViewModel.userSession != nil {
-            NavigationStack(path: $navigationPathManager.path){
-                LoggedInView()
-                    .onAppear {
-                        subjectViewModel.updateUserID()
-                        subjectViewModel.fetchSubjects()
-                        subjectViewModel.topics = []
-                        subjectViewModel.quizzes = []
-                    }
-            }
+            LoggedInView()
+                .onAppear {
+                    subjectViewModel.updateUserID()
+                    subjectViewModel.fetchSubjects()
+                    subjectViewModel.topics = []
+                    subjectViewModel.quizzes = []
+                }
         } else {
             LogInView()
                 .onAppear {
@@ -30,14 +27,5 @@ struct ContentView: View {
                     authViewModel.currentUser = nil
                 }
         }
-         */
-        
-        LoggedInView()
-            .onAppear {
-                subjectViewModel.updateUserID()
-                subjectViewModel.fetchSubjects()
-                subjectViewModel.topics = []
-                subjectViewModel.quizzes = []
-            }
     }
 }

@@ -10,8 +10,9 @@ import SwiftUI
 struct LoggedInView: View {
     @State private var selectedTab: Tab = .house
     @EnvironmentObject private var authViewModel: AuthViewModel
-    @StateObject var homePathManager: NavigationPathManager = NavigationPathManager()
-    @StateObject var subjectPathManager: NavigationPathManager = NavigationPathManager()
+    @StateObject private var homePathManager: NavigationPathManager = NavigationPathManager()
+    @StateObject private var subjectPathManager: NavigationPathManager = NavigationPathManager()
+//    @StateObject private var profilePathManager: NavigationPathManager = NavigationPathManager()
     
     init() {
         UITabBar.appearance().isHidden = true
@@ -29,7 +30,8 @@ struct LoggedInView: View {
                         .environmentObject(subjectPathManager)
                         .tag(Tab.folder)
                     
-                    ProfileView(firstName: authViewModel.currentUser?.firstName ?? "None", lastName: authViewModel.currentUser?.lastName ?? "None")
+                    ProfileView()
+//                        .environmentObject(profilePathManager)
                         .tag(Tab.person)
                 }
             }

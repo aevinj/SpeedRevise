@@ -11,13 +11,17 @@ struct ProfileView: View {
     @EnvironmentObject private var authViewModel: AuthViewModel
     @State private var rotationAngle: Double = 0
     @State private var showSettings: Bool = false
-    @State var firstName: String
-    @State var lastName: String
+    @State var firstName: String = ""
+    @State var lastName: String = ""
     
     var body: some View {
         ZStack {
             Color("BackgroundColor")
                 .ignoresSafeArea()
+                .onAppear {
+                    firstName = authViewModel.currentUser?.firstName ?? "None"
+                    lastName = authViewModel.currentUser?.lastName ?? "None"
+                }
             
             VStack{
                 HStack {
