@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct QuizDetailView: View {
-    @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject private var navigationPathManager: NavigationPathManager
     @Environment(\.colorScheme) private var colorScheme
     @State private var showSettings: Bool = false
     @State private var rotationAngle: Double = 0
@@ -26,7 +26,7 @@ struct QuizDetailView: View {
             VStack {
                 HStack {
                     Button {
-                        dismiss()
+                        navigationPathManager.path.removeLast()
                     } label: {
                         Image(systemName: "chevron.left")
                             .font(.system(size: 20, weight: .medium))
@@ -57,7 +57,7 @@ struct QuizDetailView: View {
                         SavedQuizSettingsMenuView(quizDeleted: $quizDeleted, currTopicID: currTopicID, currSubjectID: currSubjectID, currQuiz: currQuiz)
                             .onDisappear {
                                 if quizDeleted {
-                                    dismiss()
+                                    navigationPathManager.path.removeLast()
                                 }
                             }
                     })

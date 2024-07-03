@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct QuizView: View {
-    @Environment(\.dismiss) private var dismiss
+    @EnvironmentObject private var navigationPathManager: NavigationPathManager
+    
     @EnvironmentObject private var subjectViewModel: SubjectViewModel
     @State private var showSettings: Bool = false
     @State private var rotationAngle: Double = 0
@@ -20,8 +21,8 @@ struct QuizView: View {
     @State var quizName: String
     @State var tempQuiz: Bool = false
     @State var disableTempChoice: Bool
-    @State var currSubject: String? = nil
-    @State var currTopic: String? = nil
+    @State var currSubjectID: String? = nil
+    @State var currTopicID: String? = nil
     var useOnAppear: Bool = false
     
     var body: some View {
@@ -31,7 +32,7 @@ struct QuizView: View {
                 .onAppear {
                     if useOnAppear {
                         if openAIViewModel.isNotIntialised() {
-                            openAIViewModel.initialiseQuiz(difficulty: .medium, desiredTopic: currTopic!)
+                            openAIViewModel.initialiseQuiz(difficulty: .medium, desiredTopic: subjectViewModel.topics.first { $0.id == currTopicID }!.name)
                         }
                         
                         let role = openAIViewModel.messages.last!.role
@@ -51,7 +52,7 @@ struct QuizView: View {
             VStack {
                 HStack {
                     Button {
-                        dismiss()
+                        navigationPathManager.path.removeLast()
                     } label: {
                         Image(systemName: "chevron.left")
                             .font(.system(size: 20, weight: .medium))
@@ -113,11 +114,11 @@ struct QuizView: View {
                             let newQuiz = Quiz(name: "Quiz " + String(subjectViewModel.quizzes.count + 1), filteredContent: openAIViewModel.filteredMessages, unfilteredContent: openAIViewModel.messages, difficulty: .medium)
                             
                             Task {
-                                await subjectViewModel.addQuiz(newQuiz: newQuiz, subjectID: currSubject!, topicID: currTopic!)
-                                dismiss()
+                                await subjectViewModel.addQuiz(newQuiz: newQuiz, subjectID: currSubjectID!, topicID: currTopicID!)
+                                navigationPathManager.path.removeLast()
                             }
                         } else {
-                            dismiss()
+                            navigationPathManager.path.removeLast()
                         }
                     } label: {
                         Text(tempQuiz ? "Discard" : "Return")

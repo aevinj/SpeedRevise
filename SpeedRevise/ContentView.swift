@@ -8,18 +8,21 @@
 import SwiftUI
 
 struct ContentView: View {
-    @EnvironmentObject var authViewModel: AuthViewModel
-    @EnvironmentObject var subjectViewModel: SubjectViewModel
+    @EnvironmentObject private var authViewModel: AuthViewModel
+    @EnvironmentObject private var subjectViewModel: SubjectViewModel
     
     var body: some View {
+        /*
         if authViewModel.userSession != nil {
-            LoggedInView()
-                .onAppear {
-                    subjectViewModel.updateUserID()
-                    subjectViewModel.fetchSubjects()
-                    subjectViewModel.topics = []
-                    subjectViewModel.quizzes = []
-                }
+            NavigationStack(path: $navigationPathManager.path){
+                LoggedInView()
+                    .onAppear {
+                        subjectViewModel.updateUserID()
+                        subjectViewModel.fetchSubjects()
+                        subjectViewModel.topics = []
+                        subjectViewModel.quizzes = []
+                    }
+            }
         } else {
             LogInView()
                 .onAppear {
@@ -27,5 +30,14 @@ struct ContentView: View {
                     authViewModel.currentUser = nil
                 }
         }
+         */
+        
+        LoggedInView()
+            .onAppear {
+                subjectViewModel.updateUserID()
+                subjectViewModel.fetchSubjects()
+                subjectViewModel.topics = []
+                subjectViewModel.quizzes = []
+            }
     }
 }

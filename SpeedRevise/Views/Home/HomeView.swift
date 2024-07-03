@@ -1,23 +1,24 @@
-//
-//  HomeView.swift
-//  SpeedRevise
-//
-//  Created by Aevin Jais on 29/05/2024.
-//
-
 import SwiftUI
+
+struct QuizViewArguments: Hashable {
+    let quizName: String
+    var tempQuiz: Bool = false
+    let disableTempChoice: Bool
+    var currSubjectID: String? = nil
+    var currTopicID: String? = nil
+    var useOnAppear: Bool = false
+}
 
 struct HomeView: View {
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject private var authViewModel: AuthViewModel
+    @EnvironmentObject private var openAIViewModel: OpenAIViewModel
+    @EnvironmentObject private var navigationPathManager: NavigationPathManager
     @State private var notificationCount: Int = 1
     @State private var tempQuizEntry: String = ""
-    @State private var shouldNavigate: Bool = false
-    @EnvironmentObject private var openAIViewModel: OpenAIViewModel
-    @State private var filteredMessages: [FilteredMessage] = []
     
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $navigationPathManager.path) {
             ZStack {
                 Color("BackgroundColor")
                     .ignoresSafeArea()
@@ -103,18 +104,9 @@ struct HomeView: View {
                             .background(colorScheme == .dark ? Color(hex: "34373B") : Color(hex: "E6E6E6"))
                             .cornerRadius(10)
                             
-                            NavigationLink {
-                                QuizView(quizName: tempQuizEntry, tempQuiz: true, disableTempChoice: true)
-                                    .navigationBarBackButtonHidden(true)
-                                    .onAppear {
-                                        openAIViewModel.initialiseQuiz(difficulty: .medium, desiredTopic: tempQuizEntry)
-                                        tempQuizEntry = ""
-                                        
-                                        openAIViewModel.generateQuestion {
-                                            openAIViewModel.filteredMessages.append(FilteredMessage(from: openAIViewModel.messages.last!, isQuestion: true))
-                                            openAIViewModel.userResponse = ""
-                                        }
-                                    }
+                            Button {
+                                let quizViewArguments = QuizViewArguments(quizName: tempQuizEntry, tempQuiz: true, disableTempChoice: true)
+                                navigationPathManager.path.append(quizViewArguments)
                             } label: {
                                 Image(systemName: "chevron.right")
                                     .font(.system(size: 20, weight: .medium))
@@ -132,10 +124,19 @@ struct HomeView: View {
                     }
                 }
             }
+            .navigationDestination(for: QuizViewArguments.self) { quizViewArguments in
+                QuizView(quizName: quizViewArguments.quizName, tempQuiz: quizViewArguments.tempQuiz, disableTempChoice: quizViewArguments.disableTempChoice)
+                    .navigationBarBackButtonHidden(true)
+                    .onAppear {
+                        openAIViewModel.initialiseQuiz(difficulty: .medium, desiredTopic: quizViewArguments.quizName)
+                        tempQuizEntry = ""
+                        
+                        openAIViewModel.generateQuestion {
+                            openAIViewModel.filteredMessages.append(FilteredMessage(from: openAIViewModel.messages.last!, isQuestion: true))
+                            openAIViewModel.userResponse = ""
+                        }
+                    }
+            }
         }
     }
-}
-
-#Preview {
-    HomeView()
 }

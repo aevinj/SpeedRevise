@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Subject: Identifiable, Codable {
+struct Subject: Identifiable, Codable, Hashable {
     init(name: String) {
         self.id = UUID().uuidString
         self.name = name
@@ -16,7 +16,7 @@ struct Subject: Identifiable, Codable {
     var name: String
 }
 
-struct Topic: Identifiable, Codable {
+struct Topic: Identifiable, Codable, Hashable {
     init(name: String) {
         self.id = UUID().uuidString
         self.name = name
@@ -33,7 +33,7 @@ struct Note: Identifiable, Codable {
     let creationDate: Date
 }
 
-struct Quiz: Identifiable, Codable {
+struct Quiz: Identifiable, Codable, Hashable {
     init(name: String, filteredContent: [FilteredMessage], unfilteredContent: [OpenAIMessage], difficulty: Difficulty) {
         self.id = UUID().uuidString
         self.name = name
@@ -51,7 +51,7 @@ struct Quiz: Identifiable, Codable {
     let difficulty: Difficulty
 }
 
-enum Difficulty: String, Codable, CaseIterable, Identifiable{
+enum Difficulty: String, Codable, CaseIterable, Identifiable, Hashable {
     case easy
     case medium
     case hard

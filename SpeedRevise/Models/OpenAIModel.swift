@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct FilteredMessage: Identifiable, Codable {
+struct FilteredMessage: Identifiable, Codable, Hashable {
     let id: UUID
     let role: OpenAIRoles
     let content: String
@@ -28,24 +28,24 @@ struct FilteredMessage: Identifiable, Codable {
     }
 }
 
-struct OpenAIMessage: Codable {
+struct OpenAIMessage: Codable, Hashable {
     let role: OpenAIRoles
     let content: String
 }
 
-struct OpenAIRequest: Codable {
+struct OpenAIRequest: Codable, Hashable {
     let model: String
     let messages: [OpenAIMessage]
 }
 
-struct OpenAIResponse: Codable {
-    struct Choice: Codable {
+struct OpenAIResponse: Codable, Hashable {
+    struct Choice: Codable, Hashable {
         let message: OpenAIMessage
     }
     let choices: [Choice]
 }
 
-enum OpenAIRoles: String, Codable {
+enum OpenAIRoles: String, Codable, Hashable {
     case user
     case assistant
     case system

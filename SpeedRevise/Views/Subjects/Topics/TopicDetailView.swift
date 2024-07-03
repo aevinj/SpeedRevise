@@ -7,9 +7,14 @@
 
 import SwiftUI
 
+struct QuizDetailViewArguments: Hashable {
+    let currQuiz: Quiz
+    let currTopicID: String
+    let currSubjectID: String
+}
+
 struct TopicDetailView: View {
-    @Environment(\.dismiss) private var dismiss
-    @Environment(\.colorScheme) private var colorScheme
+    @EnvironmentObject private var navigationPathManager: NavigationPathManager
     @EnvironmentObject private var subjectViewModel: SubjectViewModel
     @EnvironmentObject private var openAIViewModel: OpenAIViewModel
     @State private var rotationAngle: Double = 0
@@ -31,11 +36,10 @@ struct TopicDetailView: View {
             Color("BackgroundColor")
                 .ignoresSafeArea()
             
-            // TItle, back button and settings button
             VStack {
                 HStack {
                     Button {
-                        dismiss()
+                        navigationPathManager.path.removeLast()
                     } label: {
                         Image(systemName: "chevron.left")
                             .font(.system(size: 20, weight: .medium))
@@ -66,7 +70,7 @@ struct TopicDetailView: View {
                         TopicSettingsMenuView(topicDeleted: $topicDeleted, currTopic: currTopic, currSubjectID: currSubjectID)
                             .onDisappear {
                                 if topicDeleted {
-                                    dismiss()
+                                    navigationPathManager.path.removeLast()
                                 }
                             }
                     })
@@ -87,9 +91,9 @@ struct TopicDetailView: View {
                     
                     Spacer()
                     
-                    NavigationLink {
-                        QuizView(quizName: "Quiz " + String(subjectViewModel.quizzes.count + 1), disableTempChoice: false, currSubject: currSubjectID, currTopic: currTopic.id, useOnAppear: true)
-                            .navigationBarBackButtonHidden(true)
+                    Button {
+                        let quizViewArguments = QuizViewArguments(quizName: "Quiz " + String(subjectViewModel.quizzes.count + 1), disableTempChoice: false, currSubjectID: currSubjectID, currTopicID: currTopic.id, useOnAppear: true)
+                        navigationPathManager.path.append(quizViewArguments)
                     } label: {
                         Image(systemName: "plus.square.dashed")
                             .foregroundStyle(.green)
@@ -101,32 +105,33 @@ struct TopicDetailView: View {
                 if subjectViewModel.quizzes.count > 0 {
                     List {
                         ForEach(subjectViewModel.quizzes) { quiz in
-                            Button {
-                                if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
-                                   let window = windowScene.windows.first {
-                                    window.rootViewController?.present(UIHostingController(rootView: QuizDetailView(currQuiz: quiz, currTopicID: currTopic.id, currSubjectID: currSubjectID).navigationBarBackButtonHidden(true)), animated: true, completion: nil)
-                                }
-                            } label: {
-                                HStack {
-                                    VStack(alignment: .leading) {
-                                        Text(quiz.name.capitalizedFirst)
-                                            .font(.system(size: 20))
-                                            .foregroundStyle(Color("BGCFlipped"))
-                                        
-                                        Text("Created: \(dateFormatter.string(from: quiz.creationDate))")
-                                            .font(.system(size: 14))
-                                            .foregroundStyle(Color(.systemGray))
-                                    }
-                                    
-                                    Spacer()
-                                    
-                                    Image(systemName: "note.text")
-                                        .font(.system(size: 30, weight: .medium))
+                            HStack {
+                                VStack(alignment: .leading) {
+                                    Text(quiz.name.capitalizedFirst)
+                                        .font(.system(size: 20))
                                         .foregroundStyle(Color("BGCFlipped"))
-                                        .frame(width: 75, height: 75)
-                                        .clipShape(RoundedRectangle(cornerRadius: 10))
+                                    
+                                    Text("Created: \(dateFormatter.string(from: quiz.creationDate))")
+                                        .font(.system(size: 14))
+                                        .foregroundStyle(Color(.systemGray))
                                 }
+                                
+                                Spacer()
+                                
+                                Image(systemName: "note.text")
+                                    .font(.system(size: 30, weight: .medium))
+                                    .foregroundStyle(Color("BGCFlipped"))
+                                    .frame(width: 75, height: 75)
+                                    .clipShape(RoundedRectangle(cornerRadius: 10))
                             }
+                            .overlay(content: {
+                                Button {
+                                    let quizDetailViewArguments = QuizDetailViewArguments(currQuiz: quiz, currTopicID: currTopic.id, currSubjectID: currSubjectID)
+                                    navigationPathManager.path.append(quizDetailViewArguments)
+                                } label: {
+                                    EmptyView()
+                                }.opacity(0)
+                            })
                             .listRowBackground(
                                 Rectangle()
                                     .background(.ultraThinMaterial)
