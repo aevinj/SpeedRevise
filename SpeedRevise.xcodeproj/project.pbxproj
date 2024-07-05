@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		40024D682C382E8400C5F6C8 /* NavbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40024D672C382E8400C5F6C8 /* NavbarController.swift */; };
 		4015A0422C0A489200620DC3 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4015A0412C0A489200620DC3 /* SignUpView.swift */; };
 		4022CF1F2C1F2FC900172D81 /* AddTopicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4022CF1E2C1F2FC900172D81 /* AddTopicView.swift */; };
 		402BDC592C0A275B001587D7 /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402BDC582C0A275B001587D7 /* LogInView.swift */; };
@@ -72,6 +73,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		40024D672C382E8400C5F6C8 /* NavbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavbarController.swift; sourceTree = "<group>"; };
 		4015A0412C0A489200620DC3 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		4022CF1E2C1F2FC900172D81 /* AddTopicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTopicView.swift; sourceTree = "<group>"; };
 		402BDC582C0A275B001587D7 /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
@@ -246,6 +248,7 @@
 				404A98F02C1493D900A35E28 /* SubjectViewModel.swift */,
 				40FF4B622C172F0300E6E8B5 /* OpenAIViewModel.swift */,
 				40D10EBB2C34BE8F0061B207 /* NavigationPathManager.swift */,
+				40024D672C382E8400C5F6C8 /* NavbarController.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -507,6 +510,7 @@
 				405C58492C203BCC004B27E0 /* TopicSettingsMenuView.swift in Sources */,
 				40FF4B632C172F0300E6E8B5 /* OpenAIViewModel.swift in Sources */,
 				40D10EBA2C3338310061B207 /* APIKey.swift in Sources */,
+				40024D682C382E8400C5F6C8 /* NavbarController.swift in Sources */,
 				40A3BD4B2C0BA678003560A3 /* AuthViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

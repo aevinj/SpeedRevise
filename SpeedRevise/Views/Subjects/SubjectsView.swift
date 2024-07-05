@@ -11,6 +11,7 @@ struct SubjectsView: View {
     @EnvironmentObject private var subjectViewModel: SubjectViewModel
     @EnvironmentObject private var openAIViewModel: OpenAIViewModel
     @EnvironmentObject private var navigationPathManager: NavigationPathManager
+    @EnvironmentObject private var navBarController: NavBarController
     @State private var showAddSubject: Bool = false
     @State private var slideAnimationOffset: CGFloat = 1000
     @State private var darkenBGAnimationOffset: Double = 0
@@ -98,6 +99,14 @@ struct SubjectsView: View {
                     
                     Spacer()
                 }
+                
+                VStack {
+                    Spacer()
+                    
+                    NavBarView(selectedTab: $navBarController.selectedTab)
+                }
+                .padding(.bottom, 30)
+                .ignoresSafeArea()
                 
                 if showAddSubject {
                     ZStack {

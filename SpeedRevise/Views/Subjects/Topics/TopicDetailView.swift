@@ -17,6 +17,7 @@ struct TopicDetailView: View {
     @EnvironmentObject private var navigationPathManager: NavigationPathManager
     @EnvironmentObject private var subjectViewModel: SubjectViewModel
     @EnvironmentObject private var openAIViewModel: OpenAIViewModel
+    @EnvironmentObject private var navBarController: NavBarController
     @State private var rotationAngle: Double = 0
     @State private var showSettings: Bool = false
     @State private var topicDeleted = false
@@ -161,6 +162,14 @@ struct TopicDetailView: View {
                 
                 Spacer()
             }
+            
+            VStack {
+                Spacer()
+                
+                NavBarView(selectedTab: $navBarController.selectedTab)
+            }
+            .padding(.bottom, 30)
+            .ignoresSafeArea()
         }
     }
 }

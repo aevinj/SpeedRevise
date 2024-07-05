@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @EnvironmentObject private var authViewModel: AuthViewModel
     @EnvironmentObject private var subjectViewModel: SubjectViewModel
+    @StateObject private var navBarController: NavBarController = NavBarController()
     
     var body: some View {
         if authViewModel.userSession != nil {
@@ -20,6 +21,7 @@ struct ContentView: View {
                     subjectViewModel.topics = []
                     subjectViewModel.quizzes = []
                 }
+                .environmentObject(navBarController)
         } else {
             LogInView()
                 .onAppear {

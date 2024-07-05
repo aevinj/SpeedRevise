@@ -14,6 +14,7 @@ struct HomeView: View {
     @EnvironmentObject private var authViewModel: AuthViewModel
     @EnvironmentObject private var openAIViewModel: OpenAIViewModel
     @EnvironmentObject private var navigationPathManager: NavigationPathManager
+    @EnvironmentObject private var navBarController: NavBarController
     @State private var notificationCount: Int = 1
     @State private var tempQuizEntry: String = ""
     
@@ -22,16 +23,6 @@ struct HomeView: View {
             ZStack {
                 Color("BackgroundColor")
                     .ignoresSafeArea()
-                
-                VStack {
-                    Image("leaves")
-                        .renderingMode(.template)
-                        .foregroundStyle(colorScheme == .dark ? Color(hex: "34373B") : Color(hex: "E6E6E6"))
-                    
-                    Spacer()
-                }
-                .padding(.top, 50)
-                .ignoresSafeArea()
                 
                 VStack {
                     HStack {
@@ -66,6 +57,8 @@ struct HomeView: View {
                     Spacer()
                     
                 }
+                .padding(.top, 50)
+                .ignoresSafeArea()
                 
                 ZStack {
                     VStack {
@@ -123,6 +116,15 @@ struct HomeView: View {
                             .padding(.bottom, 100)
                     }
                 }
+                .ignoresSafeArea()
+                
+                VStack {
+                    Spacer()
+                    
+                    NavBarView(selectedTab: $navBarController.selectedTab)
+                }
+                .padding(.bottom, 30)
+                .ignoresSafeArea()
             }
             .navigationDestination(for: QuizViewArguments.self) { quizViewArguments in
                 QuizView(quizName: quizViewArguments.quizName, tempQuiz: quizViewArguments.tempQuiz, disableTempChoice: quizViewArguments.disableTempChoice)

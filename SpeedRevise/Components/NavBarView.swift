@@ -16,6 +16,8 @@ enum Tab: String, CaseIterable {
 struct NavBarView: View {
     @Binding var selectedTab: Tab
     @Environment(\.colorScheme) var colorScheme
+    @State private var upscaled: Double = 1 // target = 1.35
+    @State private var downscaled: Double = 1 // target = 0.9
     
     private var fillImage: String {
         selectedTab.rawValue + ".fill"
@@ -27,15 +29,23 @@ struct NavBarView: View {
                 Group {
                     Image(systemName: selectedTab == tab ? fillImage : tab.rawValue)
                         .foregroundStyle(Color("BGCFlipped"))
-                        .scaleEffect(selectedTab == tab ? 1.35 : 0.9)
+                        .scaleEffect(selectedTab == tab ? upscaled : downscaled)
                         .font(.system(size: 25, weight: .black))
                         .frame(width: 100, height: 40)
                         .background(.clear)
+                        .onAppear {
+                            withAnimation(.spring(duration: 0.2)) {
+                                upscaled = 1.35
+                                downscaled = 0.9
+                            }
+                        }
+                        .onDisappear {
+                            upscaled = 1
+                            downscaled = 1
+                        }
                 }
                 .onTapGesture {
-                    withAnimation(.easeIn(duration: 0.1)) {
-                        selectedTab = tab
-                    }
+                    selectedTab = tab
                 }
 
             }

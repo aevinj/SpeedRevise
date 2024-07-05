@@ -16,6 +16,7 @@ struct SubjectDetailView: View {
     @EnvironmentObject private var subjectViewModel: SubjectViewModel
     @EnvironmentObject private var openAIViewModel: OpenAIViewModel
     @EnvironmentObject private var navigationPathManager: NavigationPathManager
+    @EnvironmentObject private var navBarController: NavBarController
     @State private var rotationAngle: Double = 0
     @State private var showSettings: Bool = false
     @State private var subjectDeleted: Bool = false
@@ -153,6 +154,14 @@ struct SubjectDetailView: View {
                     .padding(.bottom, 100)
                 }
             }
+            
+            VStack {
+                Spacer()
+                
+                NavBarView(selectedTab: $navBarController.selectedTab)
+            }
+            .padding(.bottom, 30)
+            .ignoresSafeArea()
             
             if showAddTopic {
                 ZStack {

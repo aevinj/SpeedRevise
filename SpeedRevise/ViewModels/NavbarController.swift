@@ -6,3 +6,7 @@
 //
 
 import Foundation
+
+class NavBarController: ObservableObject {
+    @Published var selectedTab: Tab = .house
+}

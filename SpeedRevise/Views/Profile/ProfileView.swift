@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ProfileView: View {
     @EnvironmentObject private var authViewModel: AuthViewModel
+    @EnvironmentObject private var navBarController: NavBarController
     @State private var rotationAngle: Double = 0
     @State private var showSettings: Bool = false
     @State var firstName: String = ""
@@ -138,6 +139,14 @@ struct ProfileView: View {
                         .padding(.bottom, 100)
                 })
             }
+            
+            VStack {
+                Spacer()
+                
+                NavBarView(selectedTab: $navBarController.selectedTab)
+            }
+            .padding(.bottom, 30)
+            .ignoresSafeArea()
         }
     }
 }

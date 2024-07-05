@@ -25,6 +25,8 @@ struct QuizView: View {
     @State var currTopicID: String? = nil
     var useOnAppear: Bool = false
     
+    @EnvironmentObject private var navBarController: NavBarController
+    
     var body: some View {
         ZStack {
             Color("BackgroundColor")
@@ -209,6 +211,16 @@ struct QuizView: View {
                     .padding(.bottom, 100)
                 }
             }
+            .padding(EdgeInsets(top: 40, leading: 0, bottom: 40, trailing: 0))
+            .ignoresSafeArea()
+            
+            VStack {
+                Spacer()
+                
+                NavBarView(selectedTab: $navBarController.selectedTab)
+            }
+            .padding(.bottom, 30)
+            .ignoresSafeArea()
         }
     }
 }
