@@ -220,6 +220,9 @@ struct SubjectsView: View {
                 QuizDetailView(currQuiz: quizDetailViewArguments.currQuiz, currTopicID: quizDetailViewArguments.currTopicID, currSubjectID: quizDetailViewArguments.currSubjectID)
                     .navigationBarBackButtonHidden(true)
             }
+            .navigationDestination(for: String.self) { input in
+                ViewNoteView()
+            }
         }
     }
 }

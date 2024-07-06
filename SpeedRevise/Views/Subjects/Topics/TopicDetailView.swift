@@ -14,6 +14,7 @@ struct QuizDetailViewArguments: Hashable {
 }
 
 struct TopicDetailView: View {
+    @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject private var navigationPathManager: NavigationPathManager
     @EnvironmentObject private var subjectViewModel: SubjectViewModel
     @EnvironmentObject private var openAIViewModel: OpenAIViewModel
@@ -123,16 +124,25 @@ struct TopicDetailView: View {
                                     .font(.system(size: 30, weight: .medium))
                                     .foregroundStyle(Color("BGCFlipped"))
                                     .frame(width: 75, height: 75)
+                                    .background {
+                                        Group {
+                                            if colorScheme == .dark {
+                                                Color.clear.background(Material.ultraThinMaterial)
+                                            } else {
+                                                Color(hex: "E6E6E6")
+                                            }
+                                        }
+                                    }
                                     .clipShape(RoundedRectangle(cornerRadius: 10))
+                                    .simultaneousGesture(TapGesture().onEnded {
+                                        navigationPathManager.path.append("temp")
+                                    })
                             }
-                            .overlay(content: {
-                                Button {
-                                    let quizDetailViewArguments = QuizDetailViewArguments(currQuiz: quiz, currTopicID: currTopic.id, currSubjectID: currSubjectID)
-                                    navigationPathManager.path.append(quizDetailViewArguments)
-                                } label: {
-                                    EmptyView()
-                                }.opacity(0)
-                            })
+                            .contentShape(Rectangle())
+                            .onTapGesture {
+                                 let quizDetailViewArguments = QuizDetailViewArguments(currQuiz: quiz, currTopicID: currTopic.id, currSubjectID: currSubjectID)
+                                 navigationPathManager.path.append(quizDetailViewArguments)
+                            }
                             .listRowBackground(
                                 Rectangle()
                                     .background(.ultraThinMaterial)
@@ -146,11 +156,12 @@ struct TopicDetailView: View {
                                 Task {
                                     await subjectViewModel.deleteQuiz(subjectID: currSubjectID, topicID: currTopic.id, quizID: currQuiz.id)
                                 }
-                                
                             }
                         }
                     }
                     .scrollContentBackground(.hidden)
+
+
                 } else {
                     ContentUnavailableView {
                         Label("No Quizzes", systemImage: "questionmark.folder")
