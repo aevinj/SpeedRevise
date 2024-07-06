@@ -24,6 +24,21 @@ struct LogInView: View {
 //                    .blur(radius: 80, opaque: true)
                 
                 VStack {
+                    VStack {
+                        Text("SpeedRevise")
+                            .font(.system(size: 60, weight: .bold))
+                            .foregroundStyle(Color.gray)
+                            .padding(EdgeInsets(top: 16, leading: 16, bottom: 0, trailing: 16))
+                        
+                        HStack {
+                            Spacer()
+                            
+                            Text("Development version")
+                                .font(.system(size: 20, weight: .bold))
+                                .foregroundStyle(.gray)
+                                .padding(.trailing, 16)
+                        }
+                    }
                     
                     Spacer()
                     

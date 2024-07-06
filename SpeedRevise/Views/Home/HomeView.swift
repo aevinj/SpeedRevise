@@ -94,7 +94,16 @@ struct HomeView: View {
                                     .padding(.leading, 5)
                             }
                             .frame(width: UIScreen.main.bounds.width-120, height: 60)
-                            .background(colorScheme == .dark ? Color(hex: "34373B") : Color(hex: "E6E6E6"))
+//                            .background(colorScheme == .dark ? Color(hex: "34373B") : Color(hex: "E6E6E6"))
+                            .background {
+                                Group {
+                                    if colorScheme == .dark {
+                                        Color.clear.background(Material.ultraThinMaterial)
+                                    } else {
+                                        Color(hex: "E6E6E6")
+                                    }
+                                }
+                            }
                             .cornerRadius(10)
                             
                             Button {
@@ -106,7 +115,15 @@ struct HomeView: View {
                                     .foregroundStyle(Color(.systemGray))
                                     .shadow(radius: 50)
                                     .frame(width: 60, height: 60)
-                                    .background(colorScheme == .dark ? Color(hex: "34373B") : Color(hex: "E6E6E6"))
+                                    .background {
+                                        Group {
+                                            if colorScheme == .dark {
+                                                Color.clear.background(Material.ultraThinMaterial)
+                                            } else {
+                                                Color(hex: "E6E6E6")
+                                            }
+                                        }
+                                    }
                                     .clipShape(RoundedRectangle(cornerRadius: 10))
                             }
                         }
