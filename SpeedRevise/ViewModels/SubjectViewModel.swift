@@ -120,7 +120,7 @@ class SubjectViewModel : ObservableObject {
     
     func addNote(noteContent: String, subjectID: String, topicID: String, quizID: String, quizName: String) async {
         do {
-            let newNote = Note(name: quizName + " Note", content: noteContent)
+            let newNote = Note(name: quizName + "'s Note", content: noteContent)
             let encodedNote = try Firestore.Encoder().encode(newNote)
             
             try await db.collection("users").document(userID!).collection("subjects").document(subjectID).collection("topics").document(topicID).collection("quizzes").document(quizID).collection("notes").document(newNote.id).setData(encodedNote)
