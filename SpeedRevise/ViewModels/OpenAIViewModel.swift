@@ -40,21 +40,21 @@ class OpenAIViewModel: ObservableObject {
     
     func performAnalysisOnUserResponse(completion: @escaping () -> Void) {
         Task {
-            await sendMessage(content: "Analyse this answer: \(userResponse)")
+            await sendMessage(content: "Analyse this answer: \(userResponse). Limit your response to 50 words maximum.")
             completion()
         }
     }
     
     func userUnsureOfAnswer(completion: @escaping () -> Void) {
         Task {
-            await sendMessage(content: "Tell me the answer")
+            await sendMessage(content: "Tell me the answer. Limit your response to 50 words maximum.")
             completion()
         }
     }
     
     func generateQuestion(completion: @escaping () -> Void) {
         Task {
-            await sendMessage(content: "Generate an unseen question - do not show answer unless asked to")
+            await sendMessage(content: "Generate an unseen question - do not show the answer unless asked to. Limit your response to 50 words maximum.")
             completion()
         }
     }
