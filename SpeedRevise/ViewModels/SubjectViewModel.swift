@@ -163,4 +163,20 @@ class SubjectViewModel : ObservableObject {
             print("Error fetching note: \(error.localizedDescription)")
         }
     }
+    
+    func deleteNote(subjectID: String, topicID: String, quizID: String) async {
+        do {
+            try await db.collection("users").document(userID!).collection("subjects").document(subjectID).collection("topics").document(topicID).collection("quizzes").document(quizID).collection("notes").document(self.note!.id).delete()
+            self.note = nil
+        } catch {
+            print("Error deleting note: \(error.localizedDescription)")
+        }
+        
+        await setHasNote(value: false, subjectID: subjectID, topicID: topicID, quizID: quizID)
+        
+        let quizIndex = self.quizzes.firstIndex(where: {$0.id == quizID})!
+        var mutableQuiz = self.quizzes[quizIndex]
+        mutableQuiz.hasNote = false
+        self.quizzes[quizIndex] = mutableQuiz
+    }
 }

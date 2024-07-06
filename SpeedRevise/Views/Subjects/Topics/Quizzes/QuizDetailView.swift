@@ -9,6 +9,7 @@ import SwiftUI
 
 struct QuizDetailView: View {
     @EnvironmentObject private var navigationPathManager: NavigationPathManager
+    @EnvironmentObject private var navBarController: NavBarController
     @Environment(\.colorScheme) private var colorScheme
     @State private var showSettings: Bool = false
     @State private var rotationAngle: Double = 0
@@ -102,6 +103,14 @@ struct QuizDetailView: View {
                 }
                 .padding(.bottom, 100)
             }
+            
+            VStack {
+                Spacer()
+                
+                NavBarView(selectedTab: $navBarController.selectedTab)
+            }
+            .padding(.bottom, 30)
+            .ignoresSafeArea()
         }
     }
 }

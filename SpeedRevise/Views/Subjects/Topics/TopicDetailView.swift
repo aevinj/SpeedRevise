@@ -21,7 +21,7 @@ struct TopicDetailView: View {
     @EnvironmentObject private var navBarController: NavBarController
     @State private var rotationAngle: Double = 0
     @State private var showSettings: Bool = false
-    @State private var topicDeleted = false
+    @State private var topicDeleted: Bool = false
     
     var currTopic: Topic
     let currSubjectID: String
@@ -145,26 +145,26 @@ struct TopicDetailView: View {
                                     .simultaneousGesture(TapGesture().onEnded {
                                         Task {
                                             await subjectViewModel.fetchNote(subjectID: currSubjectID, topicID: currTopic.id, quizID: quiz.id)
-                                            navigationPathManager.path.append("temp")
+                                            
+                                            let args = ViewNoteViewArguments(currTopicID: currTopic.id, currSubjectID: currSubjectID, currQuiz: quiz)
+                                            navigationPathManager.path.append(args)
                                         }
                                     })
                                 } else {
                                     VStack {
                                         if openAIViewModel.isLoading {
                                             ProgressView(label: {
-                                                Text("Loading")
-                                                    .font(.caption)
-                                                    .foregroundColor(.secondary)
+                                                Text("")
                                             }).progressViewStyle(.circular)
                                         } else {
                                             Image(systemName: "arrow.triangle.2.circlepath.icloud")
                                                 .font(.system(size: 30, weight: .medium))
-                                                .foregroundStyle(Color("BGCFlipped"))
+                                                .foregroundStyle(Color.blue)
                                                 .padding(EdgeInsets(top: 2, leading: 2, bottom: 2, trailing: 2))
                                             
                                             Text("Generate Note")
                                                 .font(.system(size: 12, weight: .medium))
-                                                .foregroundStyle(Color("BGCFlipped"))
+                                                .foregroundStyle(Color.blue)
                                                 .padding(EdgeInsets(top: 0, leading: 2, bottom: 2, trailing: 2))
                                         }
                                     }
@@ -192,7 +192,9 @@ struct TopicDetailView: View {
                                                 mutableQuiz.hasNote = true
                                                 subjectViewModel.quizzes[index] = mutableQuiz
                                             }
-                                            navigationPathManager.path.append("temp")
+                                            
+                                            let args = ViewNoteViewArguments(currTopicID: currTopic.id, currSubjectID: currSubjectID, currQuiz: quiz)
+                                            navigationPathManager.path.append(args)
                                         }
                                     })
                                 }

@@ -220,8 +220,8 @@ struct SubjectsView: View {
                 QuizDetailView(currQuiz: quizDetailViewArguments.currQuiz, currTopicID: quizDetailViewArguments.currTopicID, currSubjectID: quizDetailViewArguments.currSubjectID)
                     .navigationBarBackButtonHidden(true)
             }
-            .navigationDestination(for: String.self) { input in
-                ViewNoteView()
+            .navigationDestination(for: ViewNoteViewArguments.self) { viewNoteViewArguments in
+                ViewNoteView(currTopicID: viewNoteViewArguments.currTopicID, currSubjectID: viewNoteViewArguments.currSubjectID, currQuiz: viewNoteViewArguments.currQuiz)
                     .navigationBarBackButtonHidden(true)
             }
         }

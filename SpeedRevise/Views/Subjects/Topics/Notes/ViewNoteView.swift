@@ -7,10 +7,22 @@
 
 import SwiftUI
 
+struct ViewNoteViewArguments: Hashable {
+    let currTopicID: String
+    let currSubjectID: String
+    let currQuiz: Quiz
+}
+
 struct ViewNoteView: View {
     @EnvironmentObject private var navigationPathManager: NavigationPathManager
     @EnvironmentObject private var navBarController: NavBarController
     @EnvironmentObject private var subjectViewModel: SubjectViewModel
+    @State private var rotationAngle: Double = 0
+    @State private var showSettings: Bool = false
+    @State private var noteDeleted: Bool = false
+    let currTopicID: String
+    let currSubjectID: String
+    let currQuiz: Quiz
     
     var body: some View {
         ZStack{
@@ -32,6 +44,30 @@ struct ViewNoteView: View {
                             .clipShape(RoundedRectangle(cornerRadius: 10))
                             .padding(EdgeInsets(top: 0, leading: 20, bottom: 0, trailing: 2))
                     }
+                    
+                    Button {
+                        withAnimation(.easeInOut(duration: 0.3)) {
+                            rotationAngle += 90
+                        }
+                        showSettings.toggle()
+                    } label: {
+                        Image(systemName: showSettings ? "gearshape.fill" : "gearshape")
+                            .rotationEffect(.degrees(rotationAngle))
+                            .font(.system(size: 20, weight: .medium))
+                            .foregroundStyle(Color.primary)
+                            .shadow(radius: 50)
+                            .frame(width: 55, height: 55)
+                            .background(.ultraThinMaterial)
+                            .clipShape(RoundedRectangle(cornerRadius: 10))
+                    }
+                    .popover(isPresented: $showSettings, content: {
+                        ViewNoteViewSettingsMenuView(noteDeleted: $noteDeleted, currTopicID: currTopicID, currSubjectID: currSubjectID, currQuiz: currQuiz)
+                            .onDisappear {
+                                if noteDeleted {
+                                    navigationPathManager.path.removeLast()
+                                }
+                            }
+                    })
                     
                     Spacer()
                     

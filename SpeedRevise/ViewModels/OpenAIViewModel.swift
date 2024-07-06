@@ -127,7 +127,6 @@ class OpenAIViewModel: ObservableObject {
         isLoading = true
         
         let conversation = processQuiz(quiz: quiz)
-        print(conversation)
         
         let instruction = """
         Your aim is to observe a series of questions and answers between a user and a system. You need to identify the users' weakpoints surround the subject of \(quiz.name) and create a condensed revision leaflet for those areas.
