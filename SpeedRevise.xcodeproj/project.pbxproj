@@ -9,14 +9,10 @@
 /* Begin PBXBuildFile section */
 		40024D682C382E8400C5F6C8 /* NavbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40024D672C382E8400C5F6C8 /* NavbarController.swift */; };
 		4015A0422C0A489200620DC3 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4015A0412C0A489200620DC3 /* SignUpView.swift */; };
-		4022CF1F2C1F2FC900172D81 /* AddTopicView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4022CF1E2C1F2FC900172D81 /* AddTopicView.swift */; };
 		402BDC592C0A275B001587D7 /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402BDC582C0A275B001587D7 /* LogInView.swift */; };
-		402D618C2C28B4F200C1F577 /* ExistingTopicsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402D618B2C28B4F200C1F577 /* ExistingTopicsView.swift */; };
 		402D618E2C28B51B00C1F577 /* TopicDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402D618D2C28B51B00C1F577 /* TopicDetailView.swift */; };
 		402D61952C28B60400C1F577 /* LoggedInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402D61942C28B60400C1F577 /* LoggedInView.swift */; };
-		40429B322C1648D000BD3D69 /* NewQuizView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40429B312C1648D000BD3D69 /* NewQuizView.swift */; };
 		404A98F12C1493D900A35E28 /* SubjectViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404A98F02C1493D900A35E28 /* SubjectViewModel.swift */; };
-		404A98F32C149B5200A35E28 /* AddSubjectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 404A98F22C149B5200A35E28 /* AddSubjectView.swift */; };
 		405BB2E12C2C94D800C8D877 /* SavedQuizSettingsMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405BB2E02C2C94D800C8D877 /* SavedQuizSettingsMenuView.swift */; };
 		405C58492C203BCC004B27E0 /* TopicSettingsMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405C58482C203BCC004B27E0 /* TopicSettingsMenuView.swift */; };
 		405C584B2C204389004B27E0 /* SubjectSettingsMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 405C584A2C204389004B27E0 /* SubjectSettingsMenuView.swift */; };
@@ -75,14 +71,10 @@
 /* Begin PBXFileReference section */
 		40024D672C382E8400C5F6C8 /* NavbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavbarController.swift; sourceTree = "<group>"; };
 		4015A0412C0A489200620DC3 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
-		4022CF1E2C1F2FC900172D81 /* AddTopicView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTopicView.swift; sourceTree = "<group>"; };
 		402BDC582C0A275B001587D7 /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
-		402D618B2C28B4F200C1F577 /* ExistingTopicsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExistingTopicsView.swift; sourceTree = "<group>"; };
 		402D618D2C28B51B00C1F577 /* TopicDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicDetailView.swift; sourceTree = "<group>"; };
 		402D61942C28B60400C1F577 /* LoggedInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoggedInView.swift; sourceTree = "<group>"; };
-		40429B312C1648D000BD3D69 /* NewQuizView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewQuizView.swift; sourceTree = "<group>"; };
 		404A98F02C1493D900A35E28 /* SubjectViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectViewModel.swift; sourceTree = "<group>"; };
-		404A98F22C149B5200A35E28 /* AddSubjectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddSubjectView.swift; sourceTree = "<group>"; };
 		405BB2E02C2C94D800C8D877 /* SavedQuizSettingsMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SavedQuizSettingsMenuView.swift; sourceTree = "<group>"; };
 		405C58482C203BCC004B27E0 /* TopicSettingsMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicSettingsMenuView.swift; sourceTree = "<group>"; };
 		405C584A2C204389004B27E0 /* SubjectSettingsMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectSettingsMenuView.swift; sourceTree = "<group>"; };
@@ -152,7 +144,6 @@
 		402D61872C28B37200C1F577 /* Subjects */ = {
 			isa = PBXGroup;
 			children = (
-				404A98F22C149B5200A35E28 /* AddSubjectView.swift */,
 				4094029E2C14DB3100207CAE /* SubjectDetailView.swift */,
 				409402A02C14DBA700207CAE /* SubjectsView.swift */,
 				405C584A2C204389004B27E0 /* SubjectSettingsMenuView.swift */,
@@ -165,8 +156,6 @@
 			isa = PBXGroup;
 			children = (
 				405C58482C203BCC004B27E0 /* TopicSettingsMenuView.swift */,
-				4022CF1E2C1F2FC900172D81 /* AddTopicView.swift */,
-				402D618B2C28B4F200C1F577 /* ExistingTopicsView.swift */,
 				402D618D2C28B51B00C1F577 /* TopicDetailView.swift */,
 				402D618F2C28B54800C1F577 /* Quizzes */,
 			);
@@ -179,7 +168,6 @@
 				40D923772C1B6467000D2659 /* QuizView.swift */,
 				40B5104E2C18B4650019A55D /* QuizSettingsMenuView.swift */,
 				408195342C260A8800512CC5 /* QuizDetailView.swift */,
-				40429B312C1648D000BD3D69 /* NewQuizView.swift */,
 				405BB2E02C2C94D800C8D877 /* SavedQuizSettingsMenuView.swift */,
 			);
 			path = Quizzes;
@@ -479,7 +467,6 @@
 			files = (
 				408195352C260A8800512CC5 /* QuizDetailView.swift in Sources */,
 				402BDC592C0A275B001587D7 /* LogInView.swift in Sources */,
-				404A98F32C149B5200A35E28 /* AddSubjectView.swift in Sources */,
 				40A46BAD2C13CDC5002D983A /* Subject.swift in Sources */,
 				40A5D40A2C0658E500852CA6 /* ContentView.swift in Sources */,
 				408478D32C0FC2FC00B67DF6 /* StringCapitalisation.swift in Sources */,
@@ -490,17 +477,14 @@
 				40D10EBC2C34BE8F0061B207 /* NavigationPathManager.swift in Sources */,
 				40B5104F2C18B4650019A55D /* QuizSettingsMenuView.swift in Sources */,
 				40D923782C1B6467000D2659 /* QuizView.swift in Sources */,
-				40429B322C1648D000BD3D69 /* NewQuizView.swift in Sources */,
 				4015A0422C0A489200620DC3 /* SignUpView.swift in Sources */,
 				40A5D4342C07C6C300852CA6 /* HomeView.swift in Sources */,
 				40A5D4082C0658E500852CA6 /* SpeedReviseApp.swift in Sources */,
 				409705942C1CD164009E3431 /* AccountSettingsMenuView.swift in Sources */,
-				4022CF1F2C1F2FC900172D81 /* AddTopicView.swift in Sources */,
 				405BB2E12C2C94D800C8D877 /* SavedQuizSettingsMenuView.swift in Sources */,
 				40FF4B702C1760E900E6E8B5 /* OpenAIModel.swift in Sources */,
 				40EC2F502C0A86AB00AFA2AF /* TextInputView.swift in Sources */,
 				40A5D4322C07AEA000852CA6 /* NavBarView.swift in Sources */,
-				402D618C2C28B4F200C1F577 /* ExistingTopicsView.swift in Sources */,
 				405C584B2C204389004B27E0 /* SubjectSettingsMenuView.swift in Sources */,
 				40CE7C552C0BC106005489AD /* User.swift in Sources */,
 				404A98F12C1493D900A35E28 /* SubjectViewModel.swift in Sources */,
