@@ -78,7 +78,23 @@ struct QuizDetailView: View {
                             Text(message.content)
                                 .frame(width: UIScreen.main.bounds.width - 70)
                                 .padding()
-                                .background(message.role == .user ? Color(hex: "34373B") : Color.clear)
+                                .background {
+                                    Group {
+                                        if colorScheme == .dark {
+                                            if message.role == .user {
+                                                Color.clear.background(Material.ultraThinMaterial)
+                                            } else {
+                                                Color.clear
+                                            }
+                                        } else {
+                                            if message.role == .user {
+                                                Color(hex: "E6E6E6")
+                                            } else {
+                                                Color.clear
+                                            }
+                                        }
+                                    }
+                                }
                                 .clipShape(RoundedRectangle(cornerRadius: 10))
                                 .foregroundStyle(Color("BGCFlipped"))
                         }
