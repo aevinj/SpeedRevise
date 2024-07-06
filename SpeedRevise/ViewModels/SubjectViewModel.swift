@@ -14,6 +14,7 @@ class SubjectViewModel : ObservableObject {
     @Published var subjects: [Subject] = []
     @Published var topics: [Topic] = []
     @Published var quizzes: [Quiz] = []
+    @Published var note: Note?
     
     private let db = Firestore.firestore()
     private var userID = Auth.auth().currentUser?.uid ?? nil
@@ -114,6 +115,52 @@ class SubjectViewModel : ObservableObject {
             self.quizzes.removeAll {$0.id == quizID}
         } catch {
             print("Error deleting quiz: \(error.localizedDescription)")
+        }
+    }
+    
+    func addNote(noteContent: String, subjectID: String, topicID: String, quizID: String, quizName: String) async {
+        do {
+            let newNote = Note(name: quizName + " Note", content: noteContent)
+            let encodedNote = try Firestore.Encoder().encode(newNote)
+            
+            try await db.collection("users").document(userID!).collection("subjects").document(subjectID).collection("topics").document(topicID).collection("quizzes").document(quizID).collection("notes").document(newNote.id).setData(encodedNote)
+            self.note = newNote
+        } catch {
+            print("Error adding note: \(error.localizedDescription)")
+        }
+    }
+    
+    func setHasNote(value: Bool, subjectID: String, topicID: String, quizID: String) async {
+        do {
+            let quizRef = db.collection("users")
+                .document(userID!)
+                .collection("subjects")
+                .document(subjectID)
+                .collection("topics")
+                .document(topicID)
+                .collection("quizzes")
+                .document(quizID)
+            
+            try await quizRef.updateData(["hasNote": value])
+        } catch {
+            print("Error updating hasNote value: \(error.localizedDescription)")
+        }
+    }
+
+    func fetchNote(subjectID: String, topicID: String, quizID: String) async {
+        do {
+            let noteRef = db.collection("users").document(userID!).collection("subjects").document(subjectID).collection("topics").document(topicID).collection("quizzes").document(quizID).collection("notes").limit(to: 1)
+            
+            let snapshot = try await noteRef.getDocuments()
+            guard let document = snapshot.documents.first else {
+                print("No notes found")
+                return
+            }
+            
+            let note = try document.data(as: Note.self)
+            self.note = note
+        } catch {
+            print("Error fetching note: \(error.localizedDescription)")
         }
     }
 }

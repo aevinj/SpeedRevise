@@ -119,11 +119,19 @@ struct TopicDetailView: View {
                                 }
                                 
                                 Spacer()
-                                
-                                Image(systemName: "note.text")
-                                    .font(.system(size: 30, weight: .medium))
-                                    .foregroundStyle(Color("BGCFlipped"))
-                                    .frame(width: 75, height: 75)
+                                if quiz.hasNote {
+                                    VStack {
+                                        Image(systemName: "note.text")
+                                            .font(.system(size: 30, weight: .medium))
+                                            .foregroundStyle(Color("BGCFlipped"))
+                                            .padding(EdgeInsets(top: 2, leading: 2, bottom: 2, trailing: 2))
+                                        
+                                        Text("View Note")
+                                            .font(.system(size: 12, weight: .medium))
+                                            .foregroundStyle(Color("BGCFlipped"))
+                                            .padding(EdgeInsets(top: 0, leading: 2, bottom: 2, trailing: 2))
+                                    }
+                                    .frame(width: 100, height: 75)
                                     .background {
                                         Group {
                                             if colorScheme == .dark {
@@ -135,13 +143,64 @@ struct TopicDetailView: View {
                                     }
                                     .clipShape(RoundedRectangle(cornerRadius: 10))
                                     .simultaneousGesture(TapGesture().onEnded {
-                                        navigationPathManager.path.append("temp")
+                                        Task {
+                                            await subjectViewModel.fetchNote(subjectID: currSubjectID, topicID: currTopic.id, quizID: quiz.id)
+                                            navigationPathManager.path.append("temp")
+                                        }
                                     })
+                                } else {
+                                    VStack {
+                                        if openAIViewModel.isLoading {
+                                            ProgressView(label: {
+                                                Text("Loading")
+                                                    .font(.caption)
+                                                    .foregroundColor(.secondary)
+                                            }).progressViewStyle(.circular)
+                                        } else {
+                                            Image(systemName: "arrow.triangle.2.circlepath.icloud")
+                                                .font(.system(size: 30, weight: .medium))
+                                                .foregroundStyle(Color("BGCFlipped"))
+                                                .padding(EdgeInsets(top: 2, leading: 2, bottom: 2, trailing: 2))
+                                            
+                                            Text("Generate Note")
+                                                .font(.system(size: 12, weight: .medium))
+                                                .foregroundStyle(Color("BGCFlipped"))
+                                                .padding(EdgeInsets(top: 0, leading: 2, bottom: 2, trailing: 2))
+                                        }
+                                    }
+                                    .frame(width: 100, height: 75)
+                                    .background {
+                                        Group {
+                                            if colorScheme == .dark {
+                                                Color.clear.background(Material.ultraThinMaterial)
+                                            } else {
+                                                Color(hex: "E6E6E6")
+                                            }
+                                        }
+                                    }
+                                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                                    .simultaneousGesture(TapGesture().onEnded {
+                                        Task {
+                                            let result = await openAIViewModel.generateNote(quiz: quiz)
+                                            
+                                            await subjectViewModel.addNote(noteContent: result, subjectID: currSubjectID, topicID: currTopic.id, quizID: quiz.id, quizName: quiz.name)
+                                            
+                                            await subjectViewModel.setHasNote(value: true, subjectID: currSubjectID, topicID: currTopic.id, quizID: quiz.id)
+                                            
+                                            if let index = subjectViewModel.quizzes.firstIndex(where: { $0.id == quiz.id }) {
+                                                var mutableQuiz = subjectViewModel.quizzes[index]
+                                                mutableQuiz.hasNote = true
+                                                subjectViewModel.quizzes[index] = mutableQuiz
+                                            }
+                                            navigationPathManager.path.append("temp")
+                                        }
+                                    })
+                                }
                             }
                             .contentShape(Rectangle())
                             .onTapGesture {
-                                 let quizDetailViewArguments = QuizDetailViewArguments(currQuiz: quiz, currTopicID: currTopic.id, currSubjectID: currSubjectID)
-                                 navigationPathManager.path.append(quizDetailViewArguments)
+                                let quizDetailViewArguments = QuizDetailViewArguments(currQuiz: quiz, currTopicID: currTopic.id, currSubjectID: currSubjectID)
+                                navigationPathManager.path.append(quizDetailViewArguments)
                             }
                             .listRowBackground(
                                 Rectangle()
@@ -160,8 +219,8 @@ struct TopicDetailView: View {
                         }
                     }
                     .scrollContentBackground(.hidden)
-
-
+                    
+                    
                 } else {
                     ContentUnavailableView {
                         Label("No Quizzes", systemImage: "questionmark.folder")

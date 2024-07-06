@@ -222,6 +222,7 @@ struct SubjectsView: View {
             }
             .navigationDestination(for: String.self) { input in
                 ViewNoteView()
+                    .navigationBarBackButtonHidden(true)
             }
         }
     }

@@ -112,4 +112,46 @@ class OpenAIViewModel: ObservableObject {
             return .failure(error)
         }
     }
+    
+    private func processQuiz(quiz: Quiz) -> String {
+        var conversation = ""
+            for message in quiz.filteredContent {
+                let role = message.role.rawValue
+                let content = message.content
+                conversation += "\(role): \(content) \n "
+            }
+            return conversation
+    }
+    
+    func generateNote(quiz: Quiz) async -> String {
+        isLoading = true
+        
+        let conversation = processQuiz(quiz: quiz)
+        print(conversation)
+        
+        let instruction = """
+        Your aim is to observe a series of questions and answers between a user and a system. You need to identify the users' weakpoints surround the subject of \(quiz.name) and create a condensed revision leaflet for those areas.
+        """
+        
+        var generationMessages: [OpenAIMessage] = []
+        generationMessages.append(OpenAIMessage(role: .system, content: instruction))
+        
+        let inputMessage = OpenAIMessage(role: .user, content: "Please make notes for the following conversation: " + conversation)
+        generationMessages.append(inputMessage)
+        
+        let result = await fetchChatResponse(messages: generationMessages)
+        switch result {
+        case .success(let message):
+            DispatchQueue.main.async {
+                self.isLoading = false
+            }
+            return message.content
+        case .failure(let error):
+            DispatchQueue.main.async {
+                self.isLoading = false
+            }
+            print("Error: \(error.localizedDescription)")
+            return "NONE"
+        }
+    }
 }

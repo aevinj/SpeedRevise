@@ -25,10 +25,16 @@ struct Topic: Identifiable, Codable, Hashable {
     let name: String
 }
 
-struct Note: Identifiable, Codable {
+struct Note: Identifiable, Codable, Hashable {
+    init(name: String, content: String) {
+        self.id = UUID().uuidString
+        self.name = name
+        self.content = content
+        self.creationDate = Date()
+    }
+    
     let id: String
     var name: String
-    var description: String?
     var content: String
     let creationDate: Date
 }
@@ -41,6 +47,8 @@ struct Quiz: Identifiable, Codable, Hashable {
         self.unfilteredContent = unfilteredContent
         self.creationDate = Date()
         self.difficulty = difficulty
+        self.generatedNote = nil
+        self.hasNote = false
     }
     
     let id: String
@@ -49,6 +57,8 @@ struct Quiz: Identifiable, Codable, Hashable {
     let unfilteredContent: [OpenAIMessage]
     let creationDate: Date
     let difficulty: Difficulty
+    var generatedNote: Note?
+    var hasNote: Bool
 }
 
 enum Difficulty: String, Codable, CaseIterable, Identifiable, Hashable {
