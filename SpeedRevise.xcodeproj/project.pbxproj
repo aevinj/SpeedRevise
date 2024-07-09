@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		40024D682C382E8400C5F6C8 /* NavbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40024D672C382E8400C5F6C8 /* NavbarController.swift */; };
+		400421342C3DB7D600F2EDF4 /* NavigationBackSwipeExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 400421332C3DB7D600F2EDF4 /* NavigationBackSwipeExtension.swift */; };
 		4015A0422C0A489200620DC3 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4015A0412C0A489200620DC3 /* SignUpView.swift */; };
 		402BDC592C0A275B001587D7 /* LogInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402BDC582C0A275B001587D7 /* LogInView.swift */; };
 		402D618E2C28B51B00C1F577 /* TopicDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 402D618D2C28B51B00C1F577 /* TopicDetailView.swift */; };
@@ -72,6 +73,7 @@
 
 /* Begin PBXFileReference section */
 		40024D672C382E8400C5F6C8 /* NavbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavbarController.swift; sourceTree = "<group>"; };
+		400421332C3DB7D600F2EDF4 /* NavigationBackSwipeExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBackSwipeExtension.swift; sourceTree = "<group>"; };
 		4015A0412C0A489200620DC3 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
 		402BDC582C0A275B001587D7 /* LogInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogInView.swift; sourceTree = "<group>"; };
 		402D618D2C28B51B00C1F577 /* TopicDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopicDetailView.swift; sourceTree = "<group>"; };
@@ -216,6 +218,7 @@
 		408478D12C0FC2C000B67DF6 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				400421332C3DB7D600F2EDF4 /* NavigationBackSwipeExtension.swift */,
 				408478CF2C0FC0BC00B67DF6 /* ColorHex.swift */,
 				408478D22C0FC2FC00B67DF6 /* StringCapitalisation.swift */,
 			);
@@ -511,6 +514,7 @@
 				40FF4B632C172F0300E6E8B5 /* OpenAIViewModel.swift in Sources */,
 				40D10EBA2C3338310061B207 /* APIKey.swift in Sources */,
 				40024D682C382E8400C5F6C8 /* NavbarController.swift in Sources */,
+				400421342C3DB7D600F2EDF4 /* NavigationBackSwipeExtension.swift in Sources */,
 				40A3BD4B2C0BA678003560A3 /* AuthViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
